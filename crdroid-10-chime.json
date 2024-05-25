@@ -1,0 +1,28 @@
+{
+        "response": [
+                {
+                        "maintainer": "Joe",
+                        "oem": "Xiaomi",
+                        "device": "POCO M3 & Redmi 9T",
+                        "filename": "crDroidAndroid-14.0-20240525-chime-v10.6.zip",
+                        "download": "https://sourceforge.net/projects/crdroid/files/chime/10.x/crDroidAndroid-14.0-20240525-chime-v10.6.zip/download",
+                        "timestamp": 1716633252,
+                        "md5": "10e6f7cc1a951b99d6ef74db328522fc",
+                        "sha256": "b1177036a9757f31c2dc5bafee4dcaeefa289fb0d7ba8f4a7587413caaa67f41",
+                        "size": 1390140482,
+                        "version": "10.6",
+                        "buildtype": "Monthly",
+                        "forum": "https://forum.xda-developers.com/t/rom-android-11-juice-poco-m3-redmi-9t-redmi-9-power-redmi-note-9-4g-crdroid-v7-5-official-17-04-2021.4263541/",
+                        "gapps": "",
+                        "firmware": "",
+                        "modem": "",
+                        "bootloader": "",
+                        "recovery": "",
+                        "paypal": "",
+                        "telegram": "",
+                        "dt": "https://github.com/Dominium-Apum/device_xiaomi_chime",
+                        "common-dt": "",
+                        "kernel": "https://github.com/Dominium-Apum/kernel_xiaomi_chime"
+                }
+        ]
+}
