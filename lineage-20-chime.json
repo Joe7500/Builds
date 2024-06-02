@@ -1,12 +1,13 @@
 {
     "response": [
         {
-            "datetime": "1717339105",
+            "datetime": "1717341068",
             "filename": "lineage-20.0-20240602-UNOFFICIAL-chime.zip",
-            "romtype": "monthly",
+            "romtype": "nightly",
             "id": "6bbae864a7183f296ad3331fd58f0a23c50d29e124d9f7ce4cd0868a98478efb",
             "size": "1092410367",
-            "url": "https://github.com/lineage-20.0-20240602-UNOFFICIAL-chime.zip"
+            "url": "https://github.com/Joe7500/Builds/releases/download/Lineage-builds/lineage-21.0-20240521-UNOFFICIAL-chime.zip",
+            "version": "20.0"
         }
     ]
 }
