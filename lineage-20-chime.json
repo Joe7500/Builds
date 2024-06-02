@@ -8,15 +8,6 @@
             "size": "1092410367",
             "url": "https://github.com/Joe7500/Builds/releases/download/Lineage-builds/lineage-21.0-20240521-UNOFFICIAL-chime.zip",
             "version": "20.0"
-        },
-        {
-            "datetime": "1716076800",
-            "filename": "lineage-20.0-20240601-UNOFFICIAL-chime.zip",
-            "id": "0220b96ca2d0cf403ee4ee6612a733dd44068f45217423516a36deb0c5ffb598",
-            "romtype": "unofficial",
-            "size": "1092410365",
-            "url": "https://github.com/Joe7500/Builds/releases/download/Lineage-builds/lineage-21.0-20240520-UNOFFICIAL-chime.zip",
-            "version": "20.0"
         }
     ]
 }
