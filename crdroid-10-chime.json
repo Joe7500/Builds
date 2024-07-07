@@ -1,28 +1,28 @@
 {
-        "response": [
-                {
-                        "maintainer": "Joe",
-                        "oem": "Xiaomi",
-                        "device": "POCO M3 & Redmi 9T",
-                        "filename": "crDroidAndroid-14.0-20240525-chime-v10.6.zip",
-                        "download": "https://github.com/Joe7500/Builds/releases/download/Builds/crDroidAndroid-14.0-20240523-chime-v10.5.zip",
-                        "timestamp": 1716633252,
-                        "md5": "60504d73dbc9fa463084c329655a2d79",
-                        "sha256": "02aba365878511471949a49df18e3c95b017b9257e3ea0c35256261feaec59be",
-                        "size": 1390140482,
-                        "version": "10.6",
-                        "buildtype": "Monthly",
-                        "forum": "https://forum.xda-developers.com/t/rom-android-11-juice-poco-m3-redmi-9t-redmi-9-power-redmi-note-9-4g-crdroid-v7-5-official-17-04-2021.4263541/",
-                        "gapps": "",
-                        "firmware": "",
-                        "modem": "",
-                        "bootloader": "",
-                        "recovery": "",
-                        "paypal": "",
-                        "telegram": "",
-                        "dt": "https://github.com/Dominium-Apum/device_xiaomi_chime",
-                        "common-dt": "",
-                        "kernel": "https://github.com/Dominium-Apum/kernel_xiaomi_chime"
-                }
-        ]
+	"response": [
+		{
+			"maintainer": "Joe",
+			"oem": "Xiaomi",
+			"device": "POCO M3 & Redmi 9T",
+			"filename": "crDroidAndroid-14.0-20240706-chime-v10.6.zip",
+			"download": "https://github.com/Joe7500/Builds/releases/download/Builds/crDroidAndroid-14.0-20240706-chime-v10.6.zip",
+			"timestamp": 1720259689,
+			"md5": "cfe7e4595c60e3c26672cdaf5cfdc2cd",
+			"sha256": "9a50a4c8b78c109dc3141c7213417ec20219471b58f867a4b506615360a71b3e",
+			"size": 1389926414,
+			"version": "10.6",
+			"buildtype": "Monthly",
+			"forum": "https://forum.xda-developers.com/t/rom-android-11-juice-poco-m3-redmi-9t-redmi-9-power-redmi-note-9-4g-crdroid-v7-5-official-17-04-2021.4263541/",
+			"gapps": "",
+			"firmware": "",
+			"modem": "",
+			"bootloader": "",
+			"recovery": "",
+			"paypal": "",
+			"telegram": "",
+			"dt": "https://github.com/Joe7500/device_xiaomi_chime",
+			"common-dt": "",
+			"kernel": "https://github.com/Joe7500/kernel_xiaomi_chime"
+		}
+	]
 }
