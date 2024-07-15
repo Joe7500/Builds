@@ -1,0 +1,28 @@
+{
+	"response": [
+		{
+			"maintainer": "Joe",
+			"oem": "Xiaomi",
+			"device": "POCO M3 & Redmi 9T",
+			"filename": "crDroidAndroid-13.0-20240715-chime-v9.18.zip",
+			"download": "https://github.com/Joe7500/Builds/releases/download/Builds/crDroidAndroid-13.0-20240715-chime-v9.18.zip",
+			"timestamp": 1721041508,
+			"md5": "ca319657eb69d2bd3886899c989f0ffc",
+			"sha256": "50169861ba80a138375bcf607d9f7796c19d07c27ec9e0999b51ba7b9b335b77",
+			"size": 1218592741,
+			"version": "9.18",
+			"buildtype": "Monthly",
+			"forum": "",
+			"gapps": "https://nikgapps.com/crdroid-official",
+			"firmware": "",
+			"modem": "",
+			"bootloader": "",
+			"recovery": "",
+			"paypal": "",
+			"telegram": "",
+			"dt": "https://github.com/crdroidandroid/android_device_xiaomi_chime",
+			"common-dt": "",
+			"kernel": "https://github.com/crdroidandroid/android_kernel_xiaomi_chime"
+		}
+	]
+}
