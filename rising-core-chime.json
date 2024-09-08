@@ -1,0 +1,28 @@
+{
+        "response": [
+                {
+                        "maintainer": "Joe",
+                        "oem": "Xiaomi",
+                        "device": "Redmi 9t/Poco M3",
+                        "filename": "RisingOS-5.2-FINAL-EOL-20240908-CORE-COMMUNITY-chime-ota.zip",
+                        "download": "https://sourceforge.net/projects/joes-android-builds/files/risingOS/RisingOS-5.2-FINAL-EOL-20240908-CORE-COMMUNITY-chime-ota.zip/download",
+                        "timestamp": 1725789957,
+                        "md5": "1b17c08e3edb46c6437a78c1d2826548",
+                        "sha256": "969ca12e2be4578db0b30fa1922cf1836966333fe91cc5f4331c69b4cbc9db3f",
+                        "size": 1834561868,
+                        "version": "5.2-Lyonesse",
+                        "buildtype": "FINAL-EOL",
+                        "forum": "https://t.me/ayanot69",
+                        "gapps": "",
+                        "firmware": "",
+                        "modem": "",
+                        "bootloader": "",
+                        "recovery": "",
+                        "paypal": "https://www.paypal.me/notayan",
+                        "telegram": "",
+                        "dt": "",
+                        "common-dt": "",
+                        "kernel": ""
+                }
+        ]
+}
