@@ -1,28 +1,28 @@
 {
-	"response": [
-		{
-			"maintainer": "Joe",
-			"oem": "Xiaomi",
-			"device": "POCO M3 & Redmi 9T",
-			"filename": "crDroidAndroid-14.0-20240815-chime-v10.7.zip",
-			"download": "https://github.com/Joe7500/Builds/releases/download/Builds/crDroidAndroid-14.0-20240815-chime-v10.7.zip",
-			"timestamp": 1723727030,
-			"md5": "1ac012c4063ee6695aa5e2e7cffa9135",
-			"sha256": "b25e19445ccc73acf1bddd8904578b931444c0f096b67763a3369d25c77384cf",
-			"size": 1382971001,
-			"version": "10.7",
-			"buildtype": "Monthly",
-			"forum": "https://forum.xda-developers.com/t/rom-android-11-juice-poco-m3-redmi-9t-redmi-9-power-redmi-note-9-4g-crdroid-v7-5-official-17-04-2021.4263541/",
-			"gapps": "",
-			"firmware": "",
-			"modem": "",
-			"bootloader": "",
-			"recovery": "",
-			"paypal": "",
-			"telegram": "",
-			"dt": "https://github.com/Dominium-Apum/device_xiaomi_chime",
-			"common-dt": "",
-			"kernel": "https://github.com/Dominium-Apum/kernel_xiaomi_chime"
-		}
-	]
+        "response": [
+                {
+                        "maintainer": "Joe",
+                        "oem": "Xiaomi",
+                        "device": "POCO M3 & Redmi 9T",
+                        "filename": "crDroidAndroid-14.0-20240910-chime-v10.8.zip",
+                        "download": "https://sourceforge.net/projects/joes-android-builds/files/crDroid/10/crDroidAndroid-14.0-20240827-chime-v10.7.zip/download",
+                        "timestamp": 1725957483,
+                        "md5": "5adc364474a1bfbbca571acaf4872620",
+                        "sha256": "72544af5b85aaae4848396f4afa039d2ab758525c8060ef27f61ebdf51a61cb5",
+                        "size": 1407129508,
+                        "version": "10.8",
+                        "buildtype": "Monthly",
+                        "forum": "https://forum.xda-developers.com/t/rom-android-11-juice-poco-m3-redmi-9t-redmi-9-power-redmi-note-9-4g-crdroid-v7-5-official-17-04-2021.4263541/",
+                        "gapps": "",
+                        "firmware": "",
+                        "modem": "",
+                        "bootloader": "",
+                        "recovery": "",
+                        "paypal": "",
+                        "telegram": "",
+                        "dt": "https://github.com/Dominium-Apum/device_xiaomi_chime",
+                        "common-dt": "",
+                        "kernel": "https://github.com/Dominium-Apum/kernel_xiaomi_chime"
+                }
+        ]
 }
