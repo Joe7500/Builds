@@ -4,13 +4,13 @@
                         "maintainer": "Joe",
                         "oem": "Xiaomi",
                         "device": "POCO M3 & Redmi 9T",
-                        "filename": "crDroidAndroid-14.0-20240910-chime-v10.8.zip",
-                        "download": "https://sourceforge.net/projects/joes-android-builds/files/crDroid/10/crDroidAndroid-14.0-20240910-chime-v10.8.zip/download",
-                        "timestamp": 1725957483,
-                        "md5": "5adc364474a1bfbbca571acaf4872620",
-                        "sha256": "72544af5b85aaae4848396f4afa039d2ab758525c8060ef27f61ebdf51a61cb5",
-                        "size": 1407129508,
-                        "version": "10.8",
+                        "filename": "crDroidAndroid-14.0-20241015-chime-v10.9.zip",
+                        "download": "https://sourceforge.net/projects/joes-android-builds/files/crDroid/10/crDroidAndroid-14.0-20241015-chime-v10.9.zip/download",
+                        "timestamp": 1728944724,
+                        "md5": "0ac417b3d5fe54b5d12668a6899bcd25",
+                        "sha256": "f6a9148f1b8833a4f93125b66878ca0a67f4101741491fbcb2f34e259d2d36b0",
+                        "size": 1382455125,
+                        "version": "10.9",
                         "buildtype": "Monthly",
                         "forum": "https://forum.xda-developers.com/t/rom-android-11-juice-poco-m3-redmi-9t-redmi-9-power-redmi-note-9-4g-crdroid-v7-5-official-17-04-2021.4263541/",
                         "gapps": "",
@@ -19,10 +19,10 @@
                         "bootloader": "",
                         "recovery": "",
                         "paypal": "",
-                        "telegram": "",
-                        "dt": "https://github.com/Dominium-Apum/device_xiaomi_chime",
+                        "telegram": "https://t.me/joes_stuff",
+                        "dt": "https://github.com/Joe7500/device_xiaomi_chime",
                         "common-dt": "",
-                        "kernel": "https://github.com/Dominium-Apum/kernel_xiaomi_chime"
+                        "kernel": "https://github.com/Joe7500/kernel_xiaomi_chime"
                 }
         ]
 }
