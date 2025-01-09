@@ -1,0 +1,21 @@
+{
+        "response": [
+                {
+                        "maintainer": "Joe",
+                        "oem": "Xiaomi",
+                        "device": "Redmi 9t/Poco M3",
+                        "filename": "RisingOS-6.2-STABLE-25010819-VANILLA_AOSP-COMMUNITY-chime.zip",
+                        "download": "https://sourceforge.net/projects/joes-android-builds/files/risingOS/6/RisingOS-6.2-STABLE-25010819-VANILLA_AOSP-COMMUNITY-chime.zip/download",
+                        "timestamp": 1736420559,
+                        "md5": "fda32a5456dcf523234c833d89d4e1fa",
+                        "sha256": "83af0e7410e40d24d4711f1c4ef0e013a9839a1da4f296eb1e3609e4ccc35409",
+                        "size": 1484483585,
+                        "version": "6.2-Boundless",
+                        "buildtype": "STABLE",
+                        "forum": "https://t.me/joes_stuff",
+                        "telegram": "https://t.me/joes_stuff",
+                        "dt": "https://github.com/Joe7500/device_xiaomi_chime",
+                        "common-dt": "",
+                }
+        ]
+}
