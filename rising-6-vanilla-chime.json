@@ -12,10 +12,19 @@
                         "size": 1484483585,
                         "version": "6.2-Boundless",
                         "buildtype": "STABLE",
-                        "forum": "https://t.me/joes_stuff",
+                        "version": "5.2.1-Lyonesse",
+                        "buildtype": "FINAL-STABLE-EOL",
+                        "forum": "https://t.me/ayanot69",
+                        "gapps": "",
+                        "firmware": "",
+                        "modem": "",
+                        "bootloader": "",
+                        "recovery": "",
+                        "paypal": "",
                         "telegram": "https://t.me/joes_stuff",
                         "dt": "https://github.com/Joe7500/device_xiaomi_chime",
-                        "common-dt": ""
+                        "common-dt": "",
+                        "kernel": ""
                 }
         ]
 }
