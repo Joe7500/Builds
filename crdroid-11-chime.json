@@ -1,0 +1,28 @@
+{
+        "response": [
+                {
+                        "maintainer": "Joe",
+                        "oem": "Xiaomi",
+                        "device": "POCO M3 & Redmi 9T",
+                        "filename": "crDroidAndroid-15.0-20250119-chime-v11.1.zip",
+                        "download": "https://sourceforge.net/projects/joes-android-builds/files/crDroid/11/crDroidAndroid-15.0-20250119-chime-v11.1.zip/download",
+                        "timestamp": 1737423551, 
+                        "md5": "e650c965a69dd986416f1308333432f1",
+                        "sha256": "ceef6e0906f01da06b77d40ffa32706013c40f9251f18b4cb3a27a9e046edc9d",
+                        "size": 1433754922,
+                        "version": "11.1",
+                        "buildtype": "Monthly",
+                        "forum": "https://forum.xda-developers.com/t/rom-android-11-juice-poco-m3-redmi-9t-redmi-9-power-redmi-note-9-4g-crdroid-v7-5-official-17-04-2021.4263541/",
+                        "gapps": "",
+                        "firmware": "",
+                        "modem": "",
+                        "bootloader": "",
+                        "recovery": "",
+                        "paypal": "",
+                        "telegram": "https://t.me/joes_stuff",
+                        "dt": "https://github.com/Joe7500/device_xiaomi_chime",
+                        "common-dt": "",
+                        "kernel": "https://github.com/Joe7500/kernel_xiaomi_chime"
+                }
+        ]
+}
