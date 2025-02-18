@@ -128,9 +128,12 @@ unset KEY_PASSWORD
 cat /tmp/crave_bashrc | grep -vE "BKEY_ID|BUCKET_NAME|KEY_ENCRYPTION_PASSWORD|BAPP_KEY|TG_CID|TG_TOKEN" > /tmp/crave_bashrc.1
 mv /tmp/crave_bashrc.1 /tmp/crave_bashrc
 
+sleep 15
+echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";
 echo "==========================="
 echo "         BEGIN BUILD"
 echo "==========================="
+echo "";echo "";echo "";echo "";echo "";echo "";echo "";
 
 source build/envsetup.sh          ; check_fail
 breakfast chime user              ; check_fail
