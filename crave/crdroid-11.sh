@@ -31,14 +31,10 @@ cleanup_self () {
    rm -rf device/xiaomi/chime/
    rm -rf vendor/xiaomi/chime/
    rm -rf kernel/xiaomi/chime/
-   rm -f InterfaceController.java.patch
-   rm -f wfdservice.rc.patch
-   rm -f strings.xml.*
-   rm -f builder.sh
+   rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.* builder.sh goupload.sh GOFILE.txt
    rm -rf /tmp/android-certs*
    rm -rf /home/admin/venv/
    rm -rf custom_scripts/
-   rm -f goupload.sh GOFILE.txt
 }
 
 check_fail () {
