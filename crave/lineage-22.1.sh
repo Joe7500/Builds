@@ -37,7 +37,8 @@ cleanup_self () {
    rm -f builder.sh
    rm -rf /tmp/android-certs*
    rm -rf /home/admin/venv/
-   rm -rf custom_scripts/ 
+   rm -rf custom_scripts/
+   rm -f goupload.sh GOFILE.txt
 }
 
 check_fail () {
@@ -140,10 +141,11 @@ curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave
 cleanup_self
 
 GO_FILE="ls -1tr out/target/product/chime/$PACKAGE_NAME*.zip | tail -1"
-GO_SERVER=$(curl -s https://api.gofile.io/servers | jq -r '.data.servers[0].name')
-GO_LINK=$(curl -# -F "file=@$GO_FILE" "https://${GO_SERVER}.gofile.io/uploadFile" | jq -r '.data|.downloadPage') 2>&1
-if [ $? -eg 0 ]; then rm -f out/target/product/chime/*.zip; fi
+curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
+bash goupload.sh "$GO_FILE"
+GO_LINK=`cat GOFILE.txt`
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$PACKAGE_NAME `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
+rm -f goupload.sh GOFILE.txt
 
 echo "==========================="
 echo "$GO_LINK"
