@@ -156,7 +156,7 @@ cleanup_self
 sleep 60
 echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";
 echo "==========================="
-echo "       DONE. GOODBYE!"
+echo " DONE. THANK YOU! GOODBYE!"
 echo "==========================="
 echo "";echo "";echo "";echo "";echo "";echo "";echo "";
 
