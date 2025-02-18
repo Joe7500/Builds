@@ -27,4 +27,4 @@ echo "$LINK"
 echo
 echo 
 
-echo "$LINK" > GOFILE.txt
+echo -n "$LINK" > GOFILE.txt
