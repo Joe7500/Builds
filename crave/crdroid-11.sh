@@ -61,6 +61,7 @@ else
    echo "         SYNCING"
    echo "==========================="
    repo init $REPO_URL  ; check_fail
+   cleanup_self
    /opt/crave/resync.sh ; check_fail
 fi
 
