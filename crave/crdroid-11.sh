@@ -18,7 +18,7 @@ export KBUILD_BUILD_USER=user
 export KBUILD_BUILD_HOST=localhost
 TG_URL="https://api.telegram.org/bot$TG_TOKEN/sendMessage"
 
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io started." > /dev/null 2>&1 
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`" > /dev/null 2>&1 
 
 cleanup_self () {
    rm -rf vendor/lineage-priv/keys
@@ -42,12 +42,12 @@ check_fail () {
        if ls out/target/product/chime/$PACKAGE_NAME*.zip; then
           echo weird. build failed but OTA package exists.
           echo softfail > result.txt
-	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io softfailed." > /dev/null 2>&1
+	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io softfailed. `env TZ=Africa/Harare date`" > /dev/null 2>&1
 	  cleanup_self
           exit 1
        else
           echo fail > result.txt
-	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io failed." > /dev/null 2>&1 
+	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`" > /dev/null 2>&1 
           cleanup_self
           exit 1 
        fi
@@ -134,7 +134,7 @@ mka installclean
 mka bacon                         ; check_fail
 
 echo success > result.txt
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded." > /dev/null 2>&1 
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded. `env TZ=Africa/Harare date`" > /dev/null 2>&1 
 
 GO_FILE=`ls -1tr out/target/product/chime/$PACKAGE_NAME*.zip | tail -1`
 GO_FILE=`pwd`/$GO_FILE
