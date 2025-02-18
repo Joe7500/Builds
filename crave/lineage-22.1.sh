@@ -138,11 +138,10 @@ mka bacon                         ; check_fail
 echo success > result.txt
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded." > /dev/null 2>&1 
 
-cleanup_self
-
-GO_FILE="ls -1tr out/target/product/chime/$PACKAGE_NAME*.zip | tail -1"
+GO_FILE=`ls -1tr out/target/product/chime/$PACKAGE_NAME*.zip | tail -1`
+GO_FILE=`pwd`/$GO_FILE
 curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
-bash goupload.sh "$GO_FILE"
+bash goupload.sh $GO_FILE
 GO_LINK=`cat GOFILE.txt`
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$PACKAGE_NAME `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
 rm -f goupload.sh GOFILE.txt
@@ -150,6 +149,8 @@ rm -f goupload.sh GOFILE.txt
 echo "==========================="
 echo "$GO_LINK"
 echo "==========================="
+
+cleanup_self
 
 sleep 60
 echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";
