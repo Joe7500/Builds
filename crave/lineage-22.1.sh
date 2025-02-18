@@ -103,6 +103,7 @@ cd packages/apps/Updater/ && git reset --hard && cd ../../../
 cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml.backup.orig.txt
 cat packages/apps/Updater/app/src/main/res/values/strings.xml |sed -e "s#https://download.lineageos.org/api/v1/{device}/{type}/{incr}#https://raw.githubusercontent.com/Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.new.txt
 cp -f strings.xml.new.txt packages/apps/Updater/app/src/main/res/values/strings.xml
+rm -f strings.xml.*
 check_fail
 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
