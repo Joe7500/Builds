@@ -88,7 +88,7 @@ rm -f toolchain.tar.xz
 git clone https://github.com/Joe7500/device_xiaomi_chime.git -b $DEVICE_BRANCH device/xiaomi/chime ; check_fail
 git clone https://github.com/Joe7500/vendor_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
-cp -f strings.xml.new.txt packages/apps/Updater/app/src/main/res/values/strings.xml
+
 patch -f -p 1 < wfdservice.rc.patch ; check_fail
 cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
 patch -f -p 1 < InterfaceController.java.patch ; check_fail
@@ -102,6 +102,7 @@ echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardCon
 cd packages/apps/Updater/ && git reset --hard && cd ../../../
 cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml.backup.orig.txt
 cat packages/apps/Updater/app/src/main/res/values/strings.xml |sed -e "s#https://download.lineageos.org/api/v1/{device}/{type}/{incr}#https://raw.githubusercontent.com/Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.new.txt
+cp -f strings.xml.new.txt packages/apps/Updater/app/src/main/res/values/strings.xml
 check_fail
 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
@@ -131,6 +132,7 @@ source build/envsetup.sh          ; check_fail
 breakfast chime user              ; check_fail
 mka installclean
 mka bacon                         ; check_fail
+
 echo success > result.txt
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded." > /dev/null 2>&1 
 
