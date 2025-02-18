@@ -136,6 +136,16 @@ curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave
 
 cleanup_self
 
+GO_FILE="ls -1tr out/target/product/chime/$PACKAGE_NAME*.zip | tail -1"
+GO_SERVER=$(curl -s https://api.gofile.io/servers | jq -r '.data.servers[0].name')
+GO_LINK=$(curl -# -F "file=@$GO_FILE" "https://${GO_SERVER}.gofile.io/uploadFile" | jq -r '.data|.downloadPage') 2>&1
+if [ $? -eg 0 ]; then rm -f out/target/product/chime/*.zip; fi
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$PACKAGE_NAME `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
+
+echo "==========================="
+echo "$GO_LINK"
+echo "==========================="
+
 sleep 60
 echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";
 echo "==========================="
