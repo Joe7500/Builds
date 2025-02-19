@@ -6,6 +6,8 @@ source /tmp/crave_bashrc
 
 cd /tmp/src/android/
 
+set -v
+
 PACKAGE_NAME=lineage-22.1
 VARIANT_NAME=user
 DEVICE_BRANCH=lineage-22.1
@@ -16,9 +18,11 @@ export BUILD_USERNAME=user
 export BUILD_HOSTNAME=localhost 
 export KBUILD_BUILD_USER=user
 export KBUILD_BUILD_HOST=localhost
+if echo $@ | grep "JJ_SPEC:" ; then export JJ_SPEC=`echo $@ | cut -d ":" -f 2` ; fi
 TG_URL="https://api.telegram.org/bot$TG_TOKEN/sendMessage"
 
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`" > /dev/null 2>&1 
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
+curl -s -d "Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
 cleanup_self () {
    cd /tmp/src/android/
@@ -34,7 +38,7 @@ cleanup_self () {
    rm -rf kernel/xiaomi/chime/
    rm -f InterfaceController.java.patch
    rm -f wfdservice.rc.patch
-   rm -f strings.xml.*
+   rm -f strings.xml*
    rm -f builder.sh
    rm -rf /tmp/android-certs*
    rm -rf /home/admin/venv/
@@ -45,15 +49,18 @@ cleanup_self () {
 check_fail () {
    if [ $? -ne 0 ]; then 
        if ls out/target/product/chime/$PACKAGE_NAME*.zip; then
+	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io softfailed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
+   	  curl -s -d "Build $PACKAGE_NAME on crave.io softfailed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
           echo weird. build failed but OTA package exists.
           echo softfail > result.txt
-	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io softfailed. `env TZ=Africa/Harare date`" > /dev/null 2>&1
 	  cleanup_self
           exit 1
        else
-          echo fail > result.txt
-	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`" > /dev/null 2>&1 
+	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
+          curl -s -d "Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+	  echo "oh no. script failed"
           cleanup_self
+	  echo fail > result.txt
           exit 1 
        fi
    fi
@@ -62,17 +69,10 @@ check_fail () {
 if echo "$@" | grep resume; then
    echo "resuming"
 else
-   echo "==========================="
-   echo "         SYNCING"
-   echo "==========================="
    repo init $REPO_URL  ; check_fail
    cleanup_self
    /opt/crave/resync.sh ; check_fail
 fi
-
-echo "==========================="
-echo "         SETUP ENV"
-echo "==========================="
 
 rm -rf kernel/xiaomi/chime/
 rm -rf vendor/xiaomi/chime/
@@ -130,11 +130,6 @@ cat /tmp/crave_bashrc | grep -vE "BKEY_ID|BUCKET_NAME|KEY_ENCRYPTION_PASSWORD|BA
 mv /tmp/crave_bashrc.1 /tmp/crave_bashrc
 
 sleep 15
-echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";
-echo "==========================="
-echo "         BEGIN BUILD"
-echo "==========================="
-echo "";echo "";echo "";echo "";echo "";echo "";echo "";
 
 source build/envsetup.sh          ; check_fail
 breakfast chime user              ; check_fail
@@ -142,7 +137,8 @@ mka installclean
 mka bacon                         ; check_fail
 
 echo success > result.txt
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded. `env TZ=Africa/Harare date`" > /dev/null 2>&1 
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
+curl -s -d "Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC MORE_STUFF" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
 GO_FILE=`ls -1tr out/target/product/chime/$PACKAGE_NAME*.zip | tail -1`
 GO_FILE=`pwd`/$GO_FILE
@@ -150,19 +146,11 @@ curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/hea
 bash goupload.sh $GO_FILE
 GO_LINK=`cat GOFILE.txt`
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$PACKAGE_NAME `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
+curl -s -d "$PACKAGE_NAME `basename $GO_FILE` $GO_LINK . JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 rm -f goupload.sh GOFILE.txt
-
-echo "==========================="
-echo "$GO_LINK"
-echo "==========================="
 
 cleanup_self
 
 sleep 60
-echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";
-echo "==========================="
-echo " DONE. THANK YOU! GOODBYE!"
-echo "==========================="
-echo "";echo "";echo "";echo "";echo "";echo "";echo "";
 
 exit 0
