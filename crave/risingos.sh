@@ -6,6 +6,8 @@ source /tmp/crave_bashrc
 
 cd /tmp/src/android/
 
+set -v
+
 PACKAGE_NAME=RisingOS
 VARIANT_NAME=user
 DEVICE_BRANCH=lineage-22.1
@@ -48,22 +50,16 @@ cleanup_self () {
 check_fail () {
    if [ $? -ne 0 ]; then 
        if ls out/target/product/chime/$PACKAGE_NAME*.zip; then
-          curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="`fc -nl -8`" > /dev/null 2>&1
-          curl -s -d "`fc -nl -8`" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io softfailed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
    	  curl -s -d "Build $PACKAGE_NAME on crave.io softfailed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
           echo weird. build failed but OTA package exists.
-	  echo "`fc -nl -8`"
           echo softfail > result.txt
 	  cleanup_self
           exit 1
        else
-          curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="`fc -nl -8`" > /dev/null 2>&1
-          curl -s -d "`fc -nl -8`" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
           curl -s -d "Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 	  echo "oh no. script failed"
-   	  echo "`fc -nl -8`"
           cleanup_self
 	  echo fail > result.txt
           exit 1 
@@ -74,17 +70,10 @@ check_fail () {
 if echo "$@" | grep resume; then
    echo "resuming"
 else
-   echo "==========================="
-   echo "         SYNCING"
-   echo "==========================="
    repo init $REPO_URL  ; check_fail
    cleanup_self
    /opt/crave/resync.sh ; check_fail
 fi
-
-echo "==========================="
-echo "         SETUP ENV"
-echo "==========================="
 
 rm -rf kernel/xiaomi/chime/
 rm -rf vendor/xiaomi/chime/
@@ -168,11 +157,6 @@ echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
 cd ../../../
 
 sleep 15
-echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";
-echo "==========================="
-echo "         BEGIN BUILD"
-echo "==========================="
-echo "";echo "";echo "";echo "";echo "";echo "";echo "";
 
 source build/envsetup.sh          ; check_fail
 breakfast chime user              ; check_fail
@@ -232,17 +216,8 @@ curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$PACKAGE_NAME `basename $GO_
 curl -s -d "Build $PACKAGE_NAME VANILLA on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 rm -f goupload.sh GOFILE.txt
 
-echo "==========================="
-echo "$GO_LINK"
-echo "==========================="
-
 cleanup_self
 
 sleep 60
-echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";echo "";
-echo "==========================="
-echo " DONE. THANK YOU! GOODBYE!"
-echo "==========================="
-echo "";echo "";echo "";echo "";echo "";echo "";echo "";
 
 exit 0
