@@ -131,10 +131,14 @@ mv /tmp/crave_bashrc.1 /tmp/crave_bashrc
 
 sleep 15
 
+set +v
+
 source build/envsetup.sh          ; check_fail
 breakfast chime user              ; check_fail
 mka installclean
 mka bacon                         ; check_fail
+
+set -v
 
 echo success > result.txt
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
