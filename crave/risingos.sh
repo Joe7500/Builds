@@ -61,6 +61,7 @@ check_fail () {
           curl -s -d "`fc -nl -6`" > /dev/null 2>&1
 	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
           curl -s -d "Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+	  echo "oh no. script failed"
           cleanup_self
 	  echo fail > result.txt
           exit 1 
