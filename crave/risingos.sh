@@ -4,7 +4,7 @@ source /home/admin/.profile
 source /home/admin/.bashrc
 source /tmp/crave_bashrc
 
-#cd /tmp/src/android/
+cd /tmp/src/android/
 
 PACKAGE_NAME=RisingOS
 VARIANT_NAME=user
@@ -22,6 +22,7 @@ TG_URL="https://api.telegram.org/bot$TG_TOKEN/sendMessage"
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`" > /dev/null 2>&1 
 
 cleanup_self () {
+   cd /tmp/src/android/
    rm -rf vendor/lineage-priv/keys
    rm -rf vendor/lineage-priv
    rm -rf priv-keys
@@ -136,7 +137,7 @@ unset KEY_PASSWORD
 cat /tmp/crave_bashrc | grep -vE "BKEY_ID|BUCKET_NAME|KEY_ENCRYPTION_PASSWORD|BAPP_KEY|TG_CID|TG_TOKEN" > /tmp/crave_bashrc.1
 mv /tmp/crave_bashrc.1 /tmp/crave_bashrc
 
-cd device/xiaomi/chime && git reset --hard
+cd device/xiaomi/chime && git reset --hard ; check_fail
 export RISING_MAINTAINER="Joe"
 cat lineage_chime.mk | grep -v "RESERVE_SPACE_FOR_GAPPS" > lineage_chime.mk.1
 mv lineage_chime.mk.1 lineage_chime.mk
@@ -182,7 +183,7 @@ echo "==========================="
 echo "$GO_LINK"
 echo "==========================="
 
-cd device/xiaomi/chime && git reset --hard
+cd device/xiaomi/chime && git reset --hard ; check_fail
 export RISING_MAINTAINER="Joe"
 cat lineage_chime.mk | grep -v "RESERVE_SPACE_FOR_GAPPS" > lineage_chime.mk.1
 mv lineage_chime.mk.1 lineage_chime.mk
