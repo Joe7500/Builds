@@ -20,7 +20,8 @@ export KBUILD_BUILD_HOST=localhost
 if echo $@ | grep "JJ_SPEC:" ; then export JJ_SPEC=`echo $@ | cut -d ":" -f 2` ; fi
 TG_URL="https://api.telegram.org/bot$TG_TOKEN/sendMessage"
 
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
+curl -s -d "Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
 cleanup_self () {
    cd /tmp/src/android/
@@ -50,11 +51,13 @@ check_fail () {
           echo weird. build failed but OTA package exists.
           echo softfail > result.txt
 	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io softfailed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
+   	  curl -s -d "Build $PACKAGE_NAME on crave.io softfailed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 	  cleanup_self
           exit 1
        else
           echo fail > result.txt
-	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
+	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
+          curl -s -d "Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
           cleanup_self
           exit 1 
        fi
@@ -171,13 +174,15 @@ mka bacon                         ; check_fail
 
 echo success > result.txt
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
+curl -s -d "Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
 GO_FILE=`ls -1tr out/target/product/chime/$PACKAGE_NAME*.zip | tail -1`
 GO_FILE=`pwd`/$GO_FILE
 curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
 bash goupload.sh $GO_FILE
 GO_LINK=`cat GOFILE.txt`
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$PACKAGE_NAME `basename $GO_FILE` $GO_LINK  . JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$PACKAGE_NAME `basename $GO_FILE` $GO_LINK . JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
+curl -s -d "$PACKAGE_NAME `basename $GO_FILE` $GO_LINK . JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 rm -f goupload.sh GOFILE.txt
 
 echo "==========================="
@@ -210,6 +215,7 @@ mka bacon                         ; check_fail
 
 echo success > result.txt
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME VANILLA on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
+curl -s -d "Backup successful" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
 GO_FILE=`ls -1tr out/target/product/chime/$PACKAGE_NAME*.zip | tail -1`
 GO_FILE=`pwd`/$GO_FILE
@@ -217,6 +223,7 @@ curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/hea
 bash goupload.sh $GO_FILE
 GO_LINK=`cat GOFILE.txt`
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$PACKAGE_NAME `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
+curl -s -d "Build $PACKAGE_NAME VANILLA on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 rm -f goupload.sh GOFILE.txt
 
 echo "==========================="
