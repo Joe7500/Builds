@@ -142,7 +142,8 @@ echo success > result.txt
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
 curl -s -d "Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC MORE_STUFF" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
-GO_FILE=`ls -1tr out/target/product/chime/$PACKAGE_NAME*.zip | tail -1`
+cp out/target/product/chime/$PACKAGE_NAME*.zip .
+GO_FILE=`ls -1tr $PACKAGE_NAME*.zip | tail -1`
 GO_FILE=`pwd`/$GO_FILE
 curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
 bash goupload.sh $GO_FILE
