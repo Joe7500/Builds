@@ -49,19 +49,21 @@ check_fail () {
    if [ $? -ne 0 ]; then 
        if ls out/target/product/chime/$PACKAGE_NAME*.zip; then
           curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="`fc -nl -8`" > /dev/null 2>&1
-          curl -s -d "`fc -nl -6`" > /dev/null 2>&1
+          curl -s -d "`fc -nl -8`" > /dev/null 2>&1
 	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io softfailed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
    	  curl -s -d "Build $PACKAGE_NAME on crave.io softfailed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
           echo weird. build failed but OTA package exists.
+	  echo "`fc -nl -8`"
           echo softfail > result.txt
 	  cleanup_self
           exit 1
        else
           curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="`fc -nl -8`" > /dev/null 2>&1
-          curl -s -d "`fc -nl -6`" > /dev/null 2>&1
+          curl -s -d "`fc -nl -8`" > /dev/null 2>&1
 	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
           curl -s -d "Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 	  echo "oh no. script failed"
+   	  echo "`fc -nl -8`"
           cleanup_self
 	  echo fail > result.txt
           exit 1 
