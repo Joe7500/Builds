@@ -4,7 +4,7 @@ source /home/admin/.profile
 source /home/admin/.bashrc
 source /tmp/crave_bashrc
 
-#cd /tmp/src/android/
+cd /tmp/src/android/
 
 PACKAGE_NAME=crDroidAndroid-15
 VARIANT_NAME=user
@@ -21,6 +21,7 @@ TG_URL="https://api.telegram.org/bot$TG_TOKEN/sendMessage"
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`" > /dev/null 2>&1 
 
 cleanup_self () {
+   cd /tmp/src/android/
    rm -rf vendor/lineage-priv/keys
    rm -rf vendor/lineage-priv
    rm -rf priv-keys
