@@ -155,9 +155,9 @@ echo 'PRODUCT_BUILD_PROP_OVERRIDES += \
 echo 'WITH_GMS := true
 TARGET_DEFAULT_PIXEL_LAUNCHER := true
 ' >> lineage_chime.mk
-cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
-mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
-echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
+cat BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > BoardConfig.mk.1
+mv BoardConfig.mk.1 BoardConfig.mk
+echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
 cd ../../../
 
 sleep 15
@@ -203,10 +203,9 @@ echo 'WITH_GMS := false' >> lineage_chime.mk
 echo 'PRODUCT_PACKAGES += \
    Gallery2
 ' >> device.mk
-cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
-mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
-echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
-
+cat BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > BoardConfig.mk.1
+mv BoardConfig.mk.1 BoardConfig.mk
+echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
 cd ../../../
 
 source build/envsetup.sh          ; check_fail
