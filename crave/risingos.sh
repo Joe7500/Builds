@@ -158,10 +158,14 @@ cd ../../../
 
 sleep 15
 
+set +v
+
 source build/envsetup.sh          ; check_fail
 breakfast chime user              ; check_fail
 mka installclean
 mka bacon                         ; check_fail
+
+set -v
 
 echo success > result.txt
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC MORE_STUFF" > /dev/null 2>&1 
@@ -199,9 +203,13 @@ mv BoardConfig.mk.1 BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
 cd ../../../
 
+set +v
+
 source build/envsetup.sh          ; check_fail
 breakfast chime user              ; check_fail
 mka bacon                         ; check_fail
+
+set -v
 
 echo success > result.txt
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME VANILLA on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
