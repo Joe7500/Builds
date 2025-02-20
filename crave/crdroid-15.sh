@@ -98,7 +98,7 @@ patch -f -p 1 < InterfaceController.java.patch ; check_fail
 rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
 rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
 rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
-sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*//g' device/xiaomi/chime/BoardConfig.mk 
+sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*$//g' device/xiaomi/chime/BoardConfig.mk 
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
 
 cd packages/apps/Updater/ && git reset --hard && cd ../../../
