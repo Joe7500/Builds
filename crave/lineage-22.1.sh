@@ -38,9 +38,7 @@ cleanup_self () {
    rm -rf device/xiaomi/chime/
    rm -rf vendor/xiaomi/chime/
    rm -rf kernel/xiaomi/chime/
-   rm -f InterfaceController.java.patch
-   rm -f wfdservice.rc.patch
-   rm -f strings.xml*
+   rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml*
    rm -f builder.sh
    rm -rf /tmp/android-certs*
    rm -rf /home/admin/venv/
@@ -100,12 +98,13 @@ patch -f -p 1 < InterfaceController.java.patch ; check_fail
 rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
 rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
 rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
-sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*$//g' device/xiaomi/chime/BoardConfig.mk 
-echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
 
 cd packages/apps/Updater/ && git reset --hard && cd ../../../
 sed -ie "s#https://download.lineageos.org/api/v1/{device}/{type}/{incr}#https://raw.githubusercontent.com/Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" packages/apps/Updater/app/src/main/res/values/strings.xml
 check_fail
+
+sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*$//g' device/xiaomi/chime/BoardConfig.mk 
+echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
