@@ -109,7 +109,7 @@ sed -ie 's#RisingOS-Revived/official_devices/fifteen/OTA/device/VANILLA/{device}
 sed -ie 's#RisingOS-Revived/official_devices/fifteen/OTA/device/CORE/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME-core-chime.json#g' packages/apps/Updater/app/src/main/res/values/strings.xml
 check_fail
 
-sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*//g' device/xiaomi/chime/BoardConfig.mk
+sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*$//g' device/xiaomi/chime/BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
@@ -151,7 +151,7 @@ echo 'WITH_GMS := false' >> lineage_chime.mk
 echo 'PRODUCT_PACKAGES += \
    Gallery2
 ' >> device.mk
-sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*//g' BoardConfig.mk
+sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*$//g' BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
 cd ../../../
 
@@ -198,7 +198,7 @@ echo 'PRODUCT_BUILD_PROP_OVERRIDES += \
 echo 'WITH_GMS := true
 TARGET_DEFAULT_PIXEL_LAUNCHER := true
 ' >> lineage_chime.mk
-sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*//g' BoardConfig.mk 
+sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*//g$' BoardConfig.mk 
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
 cd ../../../
 
