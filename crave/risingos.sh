@@ -151,7 +151,7 @@ echo 'WITH_GMS := false' >> lineage_chime.mk
 echo 'PRODUCT_PACKAGES += \
    Gallery2
 ' >> device.mk
-sed -e 's/^TARGET_KERNEL_CLANG_VERSION.*//g' BoardConfig.mk
+sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*//g' BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
 cd ../../../
 
@@ -198,7 +198,7 @@ echo 'PRODUCT_BUILD_PROP_OVERRIDES += \
 echo 'WITH_GMS := true
 TARGET_DEFAULT_PIXEL_LAUNCHER := true
 ' >> lineage_chime.mk
-sed -e 's/^TARGET_KERNEL_CLANG_VERSION.*//g' BoardConfig.mk 
+sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*//g' BoardConfig.mk 
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
 cd ../../../
 
