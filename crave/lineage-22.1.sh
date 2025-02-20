@@ -30,6 +30,7 @@ cleanup_self () {
    rm -rf vendor/lineage-priv/keys
    rm -rf vendor/lineage-priv
    rm -rf priv-keys
+   rm -rf .config/b2/account_info
    cd packages/apps/Updater/ && git reset --hard && cd ../../../
    cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
    rm -rf prebuilts/clang/kernel/linux-x86/clang-stablekern/
