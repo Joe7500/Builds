@@ -44,9 +44,6 @@ cleanup_self () {
    rm -rf custom_scripts/
 }
 
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
-curl -s -d "Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
-
 check_fail () {
    if [ $? -ne 0 ]; then 
        if ls out/target/product/chime/$PACKAGE_NAME*.zip; then
