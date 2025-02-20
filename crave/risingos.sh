@@ -39,7 +39,7 @@ cleanup_self () {
    rm -rf kernel/xiaomi/chime/
    rm -f InterfaceController.java.patch
    rm -f wfdservice.rc.patch
-   rm -f strings.xml.*
+   rm -f strings.xml*
    rm -f builder.sh
    rm -rf /tmp/android-certs*
    rm -rf /home/admin/venv/
@@ -102,26 +102,20 @@ rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
 rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
 
 cd packages/apps/Updater/ && git reset --hard && cd ../../../
-cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml.backup.orig.txt
-cat strings.xml.backup.orig.txt | sed -e 's#RisingOS-Revived/official_devices/fifteen/OTA/device/GAPPS/{device}.json#Joe7500/Builds/main/rising-rev-gapps-chime.json#g' > strings.xml.new.txt
-mv strings.xml.new.txt strings.xml.backup.orig.txt
-cat strings.xml.backup.orig.txt | sed -e 's#RisingOS-Revived/official_devices/fifteen/OTA/device/VANILLA/{device}.json#Joe7500/Builds/main/rising-rev-vanilla-chime.json#g' > strings.xml.new.txt
-mv strings.xml.new.txt strings.xml.backup.orig.txt
-cat strings.xml.backup.orig.txt | sed -e 's#RisingOS-Revived/official_devices/fifteen/OTA/device/CORE/{device}.json#Joe7500/Builds/main/rising-rev-core-chime.json#g' > strings.xml.new.txt
-mv strings.xml.new.txt strings.xml.backup.orig.txt
-cp strings.xml.backup.orig.txt strings.xml
-cp -f strings.xml packages/apps/Updater/app/src/main/res/values/strings.xml
-rm -f strings.xml.*
+sed -ie 's#RisingOS-Revived/official_devices/fifteen/OTA/device/GAPPS/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME-gapps-chime.json#g' packages/apps/Updater/app/src/main/res/values/strings.xml
+sed -ie 's#RisingOS-Revived/official_devices/fifteen/OTA/device/VANILLA/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME-vanilla-chime.json#g' packages/apps/Updater/app/src/main/res/values/strings.xml
+sed -ie 's#RisingOS-Revived/official_devices/fifteen/OTA/device/CORE/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME-core-chime.json#g' packages/apps/Updater/app/src/main/res/values/strings.xml
 check_fail
 
-cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
-mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
+sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*//g' device/xiaomi/chime/BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
 virtualenv /home/admin/venv ; check_fail
+set +v
 source /home/admin/venv/bin/activate
+set -v
 pip install --upgrade b2 ; check_fail
 b2 account authorize "$BKEY_ID" "$BAPP_KEY" > /dev/null 2>&1 ; check_fail
 mkdir priv-keys
@@ -154,8 +148,7 @@ echo 'WITH_GMS := false' >> lineage_chime.mk
 echo 'PRODUCT_PACKAGES += \
    Gallery2
 ' >> device.mk
-cat BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > BoardConfig.mk.1
-mv BoardConfig.mk.1 BoardConfig.mk
+sed -e 's/^TARGET_KERNEL_CLANG_VERSION.*//g' BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
 cd ../../../
 
@@ -202,8 +195,7 @@ echo 'PRODUCT_BUILD_PROP_OVERRIDES += \
 echo 'WITH_GMS := true
 TARGET_DEFAULT_PIXEL_LAUNCHER := true
 ' >> lineage_chime.mk
-cat BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > BoardConfig.mk.1
-mv BoardConfig.mk.1 BoardConfig.mk
+sed -e 's/^TARGET_KERNEL_CLANG_VERSION.*//g' BoardConfig.mk 
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
 cd ../../../
 

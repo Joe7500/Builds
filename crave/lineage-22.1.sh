@@ -98,21 +98,19 @@ patch -f -p 1 < InterfaceController.java.patch ; check_fail
 rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
 rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
 rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
-cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
-mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
+sed -e 's/^TARGET_KERNEL_CLANG_VERSION.*//g' device/xiaomi/chime/BoardConfig.mk 
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
 
 cd packages/apps/Updater/ && git reset --hard && cd ../../../
-cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml.backup.orig.txt
-cat packages/apps/Updater/app/src/main/res/values/strings.xml |sed -e "s#https://download.lineageos.org/api/v1/{device}/{type}/{incr}#https://raw.githubusercontent.com/Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.new.txt
-cp -f strings.xml.new.txt packages/apps/Updater/app/src/main/res/values/strings.xml
-rm -f strings.xml.*
+sed -ie "s#https://download.lineageos.org/api/v1/{device}/{type}/{incr}#https://raw.githubusercontent.com/Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" packages/apps/Updater/app/src/main/res/values/strings.xml
 check_fail
 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
 virtualenv /home/admin/venv ; check_fail
+set +v
 source /home/admin/venv/bin/activate
+set -v
 pip install --upgrade b2 ; check_fail
 b2 account authorize "$BKEY_ID" "$BAPP_KEY" > /dev/null 2>&1 ; check_fail
 mkdir priv-keys
