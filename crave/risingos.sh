@@ -104,9 +104,19 @@ rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
 rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
 
 cd packages/apps/Updater/ && git reset --hard && cd ../../../
-sed -ie 's#RisingOS-Revived/official_devices/fifteen/OTA/device/GAPPS/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME-gapps-chime.json#g' packages/apps/Updater/app/src/main/res/values/strings.xml
-sed -ie 's#RisingOS-Revived/official_devices/fifteen/OTA/device/VANILLA/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME-vanilla-chime.json#g' packages/apps/Updater/app/src/main/res/values/strings.xml
-sed -ie 's#RisingOS-Revived/official_devices/fifteen/OTA/device/CORE/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME-core-chime.json#g' packages/apps/Updater/app/src/main/res/values/strings.xml
+#sed -ie 's#RisingOS-Revived/official_devices/fifteen/OTA/device/GAPPS/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME-gapps-chime.json#g' packages/apps/Updater/app/src/main/res/values/strings.xml
+#sed -ie 's#RisingOS-Revived/official_devices/fifteen/OTA/device/VANILLA/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME-vanilla-chime.json#g' packages/apps/Updater/app/src/main/res/values/strings.xml
+#sed -ie 's#RisingOS-Revived/official_devices/fifteen/OTA/device/CORE/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME-core-chime.json#g' packages/apps/Updater/app/src/main/res/values/strings.xml
+cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml.backup.orig.txt
+cat strings.xml.backup.orig.txt | sed -e 's#RisingOS-Revived/official_devices/fifteen/OTA/device/GAPPS/{device}.json#Joe7500/Builds/main/rising-rev-gapps-chime.json#g' > strings.xml.new.txt
+mv strings.xml.new.txt strings.xml.backup.orig.txt
+cat strings.xml.backup.orig.txt | sed -e 's#RisingOS-Revived/official_devices/fifteen/OTA/device/VANILLA/{device}.json#Joe7500/Builds/main/rising-rev-vanilla-chime.json#g' > strings.xml.new.txt
+mv strings.xml.new.txt strings.xml.backup.orig.txt
+cat strings.xml.backup.orig.txt | sed -e 's#RisingOS-Revived/official_devices/fifteen/OTA/device/CORE/{device}.json#Joe7500/Builds/main/rising-rev-core-chime.json#g' > strings.xml.new.txt
+mv strings.xml.new.txt strings.xml.backup.orig.txt
+cp strings.xml.backup.orig.txt strings.xml
+cp -f strings.xml packages/apps/Updater/app/src/main/res/values/strings.xml
+rm -f strings.xml.*
 check_fail
 
 sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*$//g' device/xiaomi/chime/BoardConfig.mk
