@@ -8,12 +8,12 @@ cd /tmp/src/android/
 
 set -v
 
-PACKAGE_NAME=crDroidAndroid-15
+PACKAGE_NAME=crDroidAndroid-14
 VARIANT_NAME=user
-DEVICE_BRANCH=lineage-22.1
-VENDOR_BRANCH=lineage-22
-XIAOMI_BRANCH=lineage-22.1
-REPO_URL="-u https://github.com/crdroidandroid/android.git -b 15.0 --git-lfs"
+DEVICE_BRANCH=lineage-21
+VENDOR_BRANCH=lineage-21
+XIAOMI_BRANCH=lineage-21
+REPO_URL="-u https://github.com/crdroidandroid/android.git -b 14.0 --git-lfs"
 export BUILD_USERNAME=user
 export BUILD_HOSTNAME=localhost 
 export KBUILD_BUILD_USER=user
