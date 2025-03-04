@@ -146,14 +146,14 @@ curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave
 curl -s -d "Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
 cp out/target/product/chime/$PACKAGE_NAME*.zip .
-GO_FILE=`ls -1tr $PACKAGE_NAME*.zip | tail -1`
+GO_FILE=`ls --color=never -1tr $PACKAGE_NAME*.zip | tail -1`
 GO_FILE_MD5=`md5sum "$GO_FILE"`
 GO_FILE=`pwd`/$GO_FILE
 curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
 bash goupload.sh $GO_FILE
 GO_LINK=`cat GOFILE.txt`
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$PACKAGE_NAME MD5:$GO_FILE_MD5 `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
-curl -s -d "$PACKAGE_NAME JJ_SPEC:$JJ_SPEC MD5:$GO_FILE_MD5 `basename $GO_FILE` $GO_LINK" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+curl -s -d "$PACKAGE_NAME JJ_SPEC:$JJ_SPEC MD5:$GO_FILE_MD5 $GO_LINK" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 rm -f goupload.sh GOFILE.txt
 
 TIME_TAKEN=`printf '%dh:%dm:%ds\n' $((SECONDS/3600)) $((SECONDS%3600/60)) $((SECONDS%60))`
