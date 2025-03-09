@@ -152,7 +152,7 @@ set +v
 source build/envsetup.sh          ; check_fail
 lunch lineage_chime-ap4a-user     ; check_fail
 mka installclean
-mka bacon                         ; check_fail
+axion chime va                    ; check_fail
 
 set -v
 
@@ -160,14 +160,36 @@ echo success > result.txt
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
 curl -s -d "Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
-cp out/target/product/chime/$PACKAGE_NAME*.zip .
-GO_FILE=`ls --color=never -1tr $PACKAGE_NAME*.zip | tail -1`
+cp out/target/product/chime/$PACKAGE_NAME*VANILLA*.zip .
+GO_FILE=`ls --color=never -1tr $PACKAGE_NAME*VANILLA*.zip | tail -1`
 GO_FILE_MD5=`md5sum "$GO_FILE"`
 GO_FILE=`pwd`/$GO_FILE
 curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
 bash goupload.sh $GO_FILE
 GO_LINK=`cat GOFILE.txt`
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$PACKAGE_NAME MD5:$GO_FILE_MD5 `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="MD5:$GO_FILE_MD5 JJ_SPEC:$JJ_SPEC `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
+curl -s -d "$PACKAGE_NAME JJ_SPEC:$JJ_SPEC MD5:$GO_FILE_MD5 $GO_LINK" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+rm -f goupload.sh GOFILE.txt
+
+source build/envsetup.sh          ; check_fail
+lunch lineage_chime-ap4a-user     ; check_fail
+mka installclean
+axion chime gms core              ; check_fail
+
+set -v
+
+echo success > result.txt
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
+curl -s -d "Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+
+cp out/target/product/chime/$PACKAGE_NAME*GAPPS*.zip .
+GO_FILE=`ls --color=never -1tr $PACKAGE_NAME*GAPPS*.zip | tail -1`
+GO_FILE_MD5=`md5sum "$GO_FILE"`
+GO_FILE=`pwd`/$GO_FILE
+curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
+bash goupload.sh $GO_FILE
+GO_LINK=`cat GOFILE.txt`
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="MD5:$GO_FILE_MD5 JJ_SPEC:$JJ_SPEC `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
 curl -s -d "$PACKAGE_NAME JJ_SPEC:$JJ_SPEC MD5:$GO_FILE_MD5 $GO_LINK" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 rm -f goupload.sh GOFILE.txt
 
