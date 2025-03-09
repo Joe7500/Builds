@@ -14,7 +14,7 @@ DEVICE_BRANCH=lineage-22.1
 VENDOR_BRANCH=lineage-22
 XIAOMI_BRANCH=lineage-22.1
 REPO_URL="-u https://github.com/AxionAOSP/android.git -b lineage-22.1 --git-lfs"
-OTA_SED_STRING="crdroidandroid/android_vendor_crDroidOTA/14.0/{device}.json"
+OTA_SED_STRING="AxionAOSP/official_devices/refs/heads/main/OTA/{variant}/{device}.json"
 export BUILD_USERNAME=user
 export BUILD_HOSTNAME=localhost 
 export KBUILD_BUILD_USER=user
@@ -100,7 +100,7 @@ rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/uti
 
 cd packages/apps/Updater/ && git reset --hard && cd ../../../
 cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
-cat strings.xml | sed -e "s#$OTA_SED_STRING#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.1
+cat strings.xml | sed -e "s#$OTA_SED_STRING#Joe7500/Builds/main/$PACKAGE_NAME.VANILLA.chime.json#g" > strings.xml.1
 cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
 check_fail
 
@@ -191,6 +191,12 @@ cat lineage_chime.mk | grep -v "RESERVE_SPACE_FOR_GAPPS" > lineage_chime.mk.1
 mv lineage_chime.mk.1 lineage_chime.mk
 echo "RESERVE_SPACE_FOR_GAPPS := false" >> lineage_chime.mk
 cd ../../../
+
+cd packages/apps/Updater/ && git reset --hard && cd ../../../
+cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
+cat strings.xml | sed -e "s#$OTA_SED_STRING#Joe7500/Builds/main/$PACKAGE_NAME.GMS.chime.json#g" > strings.xml.1
+cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
+check_fail
 
 set +v
 
