@@ -161,6 +161,7 @@ source build/envsetup.sh          ; check_fail
 lunch lineage_chime-ap4a-user     ; check_fail
 mka installclean
 axion chime va                    ; check_fail
+m bacon -j $(nproc --all)         ; check_fail
 
 set -v
 
@@ -188,10 +189,13 @@ cat device.mk | grep -v  'PRODUCT_PACKAGES += Browser' > device.mk.1
 mv device.mk.1 device.mk
 cd ../../../
 
+set +v
+
 source build/envsetup.sh          ; check_fail
 lunch lineage_chime-ap4a-user     ; check_fail
 mka installclean
 axion chime gms core              ; check_fail
+m bacon -j $(nproc --all)         ; check_fail
 
 set -v
 
@@ -199,8 +203,8 @@ echo success > result.txt
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
 curl -s -d "Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
-cp out/target/product/chime/$PACKAGE_NAME*GAPPS*.zip .
-GO_FILE=`ls --color=never -1tr $PACKAGE_NAME*GAPPS*.zip | tail -1`
+cp out/target/product/chime/$PACKAGE_NAME*GMS*.zip .
+GO_FILE=`ls --color=never -1tr $PACKAGE_NAME*GMS*.zip | tail -1`
 GO_FILE_MD5=`md5sum "$GO_FILE"`
 GO_FILE=`pwd`/$GO_FILE
 curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
