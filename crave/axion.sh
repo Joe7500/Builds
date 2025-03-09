@@ -111,6 +111,8 @@ echo 'AXION_MAINTAINER := Joe' >> lineage_chime.mk
 echo 'AXION_PROCESSOR := Snapdragon_662' >> lineage_chime.mk
 echo 'AXION_CPU_SMALL_CORES := 0,1,2,3' >> lineage_chime.mk
 echo 'AXION_CPU_BIG_CORES := 4,5,6,7' >> lineage_chime.mk
+echo 'AXION_CAMERA_REAR_INFO := 48' >> lineage_chime.mk
+echo 'AXION_CAMERA_FRONT_INFO := 8' >> lineage_chime.mk 
 echo 'genfscon proc /sys/vm/dirty_writeback_centisecs     u:object_r:proc_dirty:s0' >> sepolicy/vendor/genfs_contexts
 echo 'genfscon proc /sys/vm/vfs_cache_pressure            u:object_r:proc_drop_caches:s0' >> sepolicy/vendor/genfs_contexts
 echo 'genfscon proc /sys/vm/dirty_ratio u:object_r:proc_dirty:s0' >> sepolicy/vendor/genfs_contexts
@@ -145,6 +147,12 @@ unset KEY_PASSWORD
 cat /tmp/crave_bashrc | grep -vE "BKEY_ID|BUCKET_NAME|KEY_ENCRYPTION_PASSWORD|BAPP_KEY|TG_CID|TG_TOKEN" > /tmp/crave_bashrc.1
 mv /tmp/crave_bashrc.1 /tmp/crave_bashrc
 
+cd device/xiaomi/chime
+echo 'PRODUCT_PACKAGES += Gallery2' >> device.mk
+echo 'PRODUCT_PACKAGES += Music' >> device.mk
+echo 'PRODUCT_PACKAGES += Browser2' >> device.mk
+cd ../../../
+
 sleep 15
 
 set +v
@@ -170,6 +178,15 @@ GO_LINK=`cat GOFILE.txt`
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="MD5:$GO_FILE_MD5 JJ_SPEC:$JJ_SPEC `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
 curl -s -d "$PACKAGE_NAME JJ_SPEC:$JJ_SPEC MD5:$GO_FILE_MD5 $GO_LINK" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 rm -f goupload.sh GOFILE.txt
+
+cd device/xiaomi/chime
+cat device.mk | grep -v 'PRODUCT_PACKAGES += Gallery2' > device.mk.1
+mv device.mk.1 device.mk
+cat device.mk | grep -v  'PRODUCT_PACKAGES += Music' > device.mk.1
+mv device.mk.1 device.mk
+cat device.mk | grep -v  'PRODUCT_PACKAGES += Browser' > device.mk.1
+mv device.mk.1 device.mk
+cd ../../../
 
 source build/envsetup.sh          ; check_fail
 lunch lineage_chime-ap4a-user     ; check_fail
