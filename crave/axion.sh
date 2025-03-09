@@ -185,8 +185,11 @@ cat device.mk | grep -v 'PRODUCT_PACKAGES += Gallery2' > device.mk.1
 mv device.mk.1 device.mk
 cat device.mk | grep -v  'PRODUCT_PACKAGES += Music' > device.mk.1
 mv device.mk.1 device.mk
-cat device.mk | grep -v  'PRODUCT_PACKAGES += Browser' > device.mk.1
+cat device.mk | grep -v  'PRODUCT_PACKAGES += Browser2' > device.mk.1
 mv device.mk.1 device.mk
+cat lineage_chime.mk | grep -v "RESERVE_SPACE_FOR_GAPPS" > lineage_chime.mk.1
+mv lineage_chime.mk.1 lineage_chime.mk
+echo "RESERVE_SPACE_FOR_GAPPS := false" >> lineage_chime.mk
 cd ../../../
 
 set +v
