@@ -34,6 +34,8 @@ cleanup_self () {
    rm -rf .config/b2/account_info
    cd packages/apps/Updater/ && git reset --hard && cd ../../../
    cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
+   cd android/vendor/lineage && git reset --hard && cd ../../..
+   rm -f backuptool*
    rm -rf prebuilts/clang/kernel/linux-x86/clang-stablekern/
    rm -rf hardware/xiaomi/
    rm -rf device/xiaomi/chime/
@@ -103,6 +105,12 @@ cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
 cat strings.xml | sed -e "s#$OTA_SED_STRING#Joe7500/Builds/main/$PACKAGE_NAME.VANILLA.chime.json#g" > strings.xml.1
 cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
 check_fail
+
+cd android/vendor/lineage && git reset --hard && cd ../../..
+cp android/vendor/lineage/prebuilt/common/bin/backuptool.sh backuptool.sh
+cat backuptool.sh | sed -e 's#export V=22#export V=1# g' > backuptool.sh.1
+mv backuptool.sh.1 android/vendor/lineage/prebuilt/common/bin/backuptool.sh
+rm backuptool.sh
 
 cd device/xiaomi/chime && git reset --hard ; check_fail
 cat BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > BoardConfig.mk.1
