@@ -162,7 +162,7 @@ set +v
 source build/envsetup.sh          ; check_fail
 lunch lineage_chime-ap4a-user     ; check_fail
 mka installclean
-axion chime va user               ; check_fail
+axion chime user va               ; check_fail
 m bacon -j $(nproc --all)         ; check_fail
 
 set -v
@@ -201,7 +201,7 @@ set +v
 source build/envsetup.sh          ; check_fail
 lunch lineage_chime-ap4a-user     ; check_fail
 mka installclean
-axion chime gms user              ; check_fail
+axion chime user gms              ; check_fail
 m bacon -j $(nproc --all)         ; check_fail
 
 set -v
