@@ -32,6 +32,7 @@ cleanup_self () {
    rm -rf vendor/lineage-priv
    rm -rf priv-keys
    rm -rf .config/b2/account_info
+   rm -f $PACKAGE_NAME*.zip
    cd packages/apps/Updater/ && git reset --hard && cd ../../../
    cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
    cd vendor/lineage && git reset --hard && cd ../..
