@@ -84,7 +84,7 @@ else
    /opt/crave/resync.sh ; check_fail
 fi
 
-# Device trees and stuff
+# Fetch device trees and stuff
 rm -rf kernel/xiaomi/chime/
 rm -rf vendor/xiaomi/chime/
 rm -rf device/xiaomi/chime/
