@@ -172,16 +172,17 @@ echo success > result.txt
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
 curl -s -d "Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
-cp out/target/product/chime/$PACKAGE_NAME*VANILLA*.zip .
-GO_FILE=`ls --color=never -1tr $PACKAGE_NAME*VANILLA*.zip | tail -1`
-GO_FILE_MD5=`md5sum "$GO_FILE"`
-GO_FILE=`pwd`/$GO_FILE
-curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
-bash goupload.sh $GO_FILE
-GO_LINK=`cat GOFILE.txt`
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="MD5:$GO_FILE_MD5 JJ_SPEC:$JJ_SPEC `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
-curl -s -d "$PACKAGE_NAME JJ_SPEC:$JJ_SPEC MD5:$GO_FILE_MD5 $GO_LINK" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
-rm -f goupload.sh GOFILE.txt
+if cp out/target/product/chime/$PACKAGE_NAME*VANILLA*.zip . ; then
+    GO_FILE=`ls --color=never -1tr $PACKAGE_NAME*VANILLA*.zip | tail -1`
+    GO_FILE_MD5=`md5sum "$GO_FILE"`
+    GO_FILE=`pwd`/$GO_FILE
+    curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
+    bash goupload.sh $GO_FILE
+    GO_LINK=`cat GOFILE.txt`
+    curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="MD5:$GO_FILE_MD5 JJ_SPEC:$JJ_SPEC `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
+    curl -s -d "$PACKAGE_NAME JJ_SPEC:$JJ_SPEC MD5:$GO_FILE_MD5 $GO_LINK" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+    rm -f goupload.sh GOFILE.txt
+fi
 
 cd device/xiaomi/chime
 cat lineage_chime.mk | grep -v "RESERVE_SPACE_FOR_GAPPS" > lineage_chime.mk.1
@@ -211,16 +212,17 @@ echo success > result.txt
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
 curl -s -d "Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
-cp out/target/product/chime/$PACKAGE_NAME*GMS*.zip .
-GO_FILE=`ls --color=never -1tr $PACKAGE_NAME*GMS*.zip | tail -1`
-GO_FILE_MD5=`md5sum "$GO_FILE"`
-GO_FILE=`pwd`/$GO_FILE
-curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
-bash goupload.sh $GO_FILE
-GO_LINK=`cat GOFILE.txt`
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="MD5:$GO_FILE_MD5 JJ_SPEC:$JJ_SPEC `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
-curl -s -d "$PACKAGE_NAME JJ_SPEC:$JJ_SPEC MD5:$GO_FILE_MD5 $GO_LINK" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
-rm -f goupload.sh GOFILE.txt
+if cp out/target/product/chime/$PACKAGE_NAME*GMS*.zip . ; then
+    GO_FILE=`ls --color=never -1tr $PACKAGE_NAME*GMS*.zip | tail -1`
+    GO_FILE_MD5=`md5sum "$GO_FILE"`
+    GO_FILE=`pwd`/$GO_FILE
+    curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
+    bash goupload.sh $GO_FILE
+    GO_LINK=`cat GOFILE.txt`
+    curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="MD5:$GO_FILE_MD5 JJ_SPEC:$JJ_SPEC `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
+    curl -s -d "$PACKAGE_NAME JJ_SPEC:$JJ_SPEC MD5:$GO_FILE_MD5 $GO_LINK" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+    rm -f goupload.sh GOFILE.txt
+fi
 
 TIME_TAKEN=`printf '%dh:%dm:%ds\n' $((SECONDS/3600)) $((SECONDS%3600/60)) $((SECONDS%60))`
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io completed. $TIME_TAKEN. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
