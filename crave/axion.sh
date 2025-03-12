@@ -194,7 +194,7 @@ cat strings.xml | sed -e "s#$OTA_SED_STRING#Joe7500/Builds/main/$PACKAGE_NAME.GM
 cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
 check_fail
 
-cd vendor/lineage && git reset --hard && cd ../..
+#cd vendor/lineage && git reset --hard && cd ../..
 
 set +v
 
