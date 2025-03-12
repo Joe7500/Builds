@@ -47,11 +47,6 @@ cleanup_self () {
    rm -rf /tmp/android-certs*
    rm -rf /home/admin/venv/
    rm -rf custom_scripts/
-   unset BUCKET_NAME
-   unset KEY_ENCRYPTION_PASSWORD
-   unset BKEY_ID
-   unset BAPP_KEY
-   unset KEY_PASSWORD
 }
 
 # Better than || exit 1
