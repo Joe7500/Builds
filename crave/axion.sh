@@ -26,6 +26,7 @@ TG_URL="https://api.telegram.org/bot$TG_TOKEN/sendMessage"
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
 curl -s -d "Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
+# Always clean up. Especially secrets and creds.
 cleanup_self () {
    cd /tmp/src/android/
    rm -rf vendor/lineage-priv/keys
@@ -46,8 +47,14 @@ cleanup_self () {
    rm -rf /tmp/android-certs*
    rm -rf /home/admin/venv/
    rm -rf custom_scripts/
+   unset BUCKET_NAME
+   unset KEY_ENCRYPTION_PASSWORD
+   unset BKEY_ID
+   unset BAPP_KEY
+   unset KEY_PASSWORD
 }
 
+# Better than || exit 1
 check_fail () {
    if [ $? -ne 0 ]; then 
        if ls out/target/product/chime/$PACKAGE_NAME*.zip; then
@@ -68,6 +75,7 @@ check_fail () {
    fi
 }
 
+# Better to NOT sync on silly failures
 if echo "$@" | grep resume; then
    echo "resuming"
 else
@@ -76,6 +84,7 @@ else
    /opt/crave/resync.sh ; check_fail
 fi
 
+# Device trees and stuff
 rm -rf kernel/xiaomi/chime/
 rm -rf vendor/xiaomi/chime/
 rm -rf device/xiaomi/chime/
@@ -94,6 +103,7 @@ git clone https://github.com/Joe7500/device_xiaomi_chime.git -b $DEVICE_BRANCH d
 git clone https://github.com/Joe7500/vendor_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
 
+# Source code patches
 patch -f -p 1 < wfdservice.rc.patch ; check_fail
 cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
 patch -f -p 1 < InterfaceController.java.patch ; check_fail
@@ -113,9 +123,8 @@ cat backuptool.sh | sed -e 's#export V=22#export V=1# g' > backuptool.sh.1
 cp backuptool.sh.1 vendor/lineage/prebuilt/common/bin/backuptool.sh
 rm backuptool.sh
 
+# Bringup device tree for specific rom
 cd device/xiaomi/chime && git reset --hard ; check_fail
-cat BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > BoardConfig.mk.1
-mv BoardConfig.mk.1 BoardConfig.mk
 echo 'AXION_MAINTAINER := Joe' >> lineage_chime.mk
 echo 'AXION_PROCESSOR := Snapdragon_662' >> lineage_chime.mk
 echo 'AXION_CPU_SMALL_CORES := 0,1,2,3' >> lineage_chime.mk
@@ -126,13 +135,13 @@ echo 'genfscon proc /sys/vm/dirty_writeback_centisecs     u:object_r:proc_dirty:
 echo 'genfscon proc /sys/vm/vfs_cache_pressure            u:object_r:proc_drop_caches:s0' >> sepolicy/vendor/genfs_contexts
 echo 'genfscon proc /sys/vm/dirty_ratio u:object_r:proc_dirty:s0' >> sepolicy/vendor/genfs_contexts
 echo 'genfscon proc /sys/kernel/sched_migration_cost_ns u:object_r:proc_sched:s0' >> sepolicy/vendor/genfs_contexts
+cat BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > BoardConfig.mk.1
+mv BoardConfig.mk.1 BoardConfig.mk
+echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
 cd ../../../
 echo 'CONFIG_SCHED_DEBUG=y' >> kernel/xiaomi/chime/arch/arm64/configs/vendor/chime_defconfig
 
-cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
-mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
-echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
-
+# Get signing keys. Don't leak creds to logs.
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
 virtualenv /home/admin/venv ; check_fail
@@ -172,6 +181,7 @@ echo success > result.txt
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
 curl -s -d "Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
+# Upload to Gofile
 if cp out/target/product/chime/$PACKAGE_NAME*VANILLA*.zip . ; then
     GO_FILE=`ls --color=never -1tr $PACKAGE_NAME*VANILLA*.zip | tail -1`
     GO_FILE_MD5=`md5sum "$GO_FILE"`
@@ -228,6 +238,7 @@ TIME_TAKEN=`printf '%dh:%dm:%ds\n' $((SECONDS/3600)) $((SECONDS%3600/60)) $((SEC
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io completed. $TIME_TAKEN. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
 curl -s -d "Build $PACKAGE_NAME on crave.io completed. $TIME_TAKEN. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
+# Always clean up.
 cleanup_self
 
 sleep 60
