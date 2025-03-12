@@ -34,7 +34,7 @@ cleanup_self () {
    rm -rf .config/b2/account_info
    cd packages/apps/Updater/ && git reset --hard && cd ../../../
    cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
-   cd android/vendor/lineage && git reset --hard && cd ../../..
+   cd android/vendor/lineage && git reset --hard && cd ../..
    rm -f backuptool*
    rm -rf prebuilts/clang/kernel/linux-x86/clang-stablekern/
    rm -rf hardware/xiaomi/
