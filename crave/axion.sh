@@ -106,7 +106,7 @@ cat strings.xml | sed -e "s#$OTA_SED_STRING#Joe7500/Builds/main/$PACKAGE_NAME.VA
 cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
 check_fail
 
-cd vendor/lineage && git reset --hard && cd ../../..
+cd vendor/lineage && git reset --hard && cd ../..
 cp vendor/lineage/prebuilt/common/bin/backuptool.sh backuptool.sh
 cat backuptool.sh | sed -e 's#export V=22#export V=1# g' > backuptool.sh.1
 cp backuptool.sh.1 vendor/lineage/prebuilt/common/bin/backuptool.sh
@@ -194,7 +194,7 @@ cat strings.xml | sed -e "s#$OTA_SED_STRING#Joe7500/Builds/main/$PACKAGE_NAME.GM
 cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
 check_fail
 
-cd vendor/lineage && git reset --hard && cd ../../..
+cd vendor/lineage && git reset --hard && cd ../..
 
 set +v
 
