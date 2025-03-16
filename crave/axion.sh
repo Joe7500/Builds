@@ -39,6 +39,7 @@ cleanup_self () {
    cd vendor/lineage && git reset --hard && cd ../..
    rm -f backuptool*
    rm -rf prebuilts/clang/kernel/linux-x86/clang-stablekern/
+   rm -rf prebuilts/clang/host/linux-x86/clang-stablekern/
    rm -rf hardware/xiaomi/
    rm -rf device/xiaomi/chime/
    rm -rf vendor/xiaomi/chime/
