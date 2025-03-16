@@ -133,6 +133,7 @@ echo 'genfscon proc /sys/kernel/sched_migration_cost_ns u:object_r:proc_sched:s0
 cat BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > BoardConfig.mk.1
 mv BoardConfig.mk.1 BoardConfig.mk
 #echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
+echo 'override KERNEL_TOOLCHAIN_PREFIX_arm := arm-linux-android-' >> BoardConfig.mk
 cd ../../../
 echo 'CONFIG_SCHED_DEBUG=y' >> kernel/xiaomi/chime/arch/arm64/configs/vendor/chime_defconfig
 
