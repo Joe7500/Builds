@@ -94,6 +94,7 @@ rm -f lineage-22.1.tar.xz
 curl -o toolchain.tar.xz -L "https://github.com/Joe7500/Builds/releases/download/Stuff/toolchain.tar.xz" ; check_fail
 tar xf toolchain.tar.xz ; check_fail
 rm -f toolchain.tar.xz
+rm -f "prebuilts/clang/host/linux-x86/clang-stablekern/lib/libc++.so.1.0" "prebuilts/clang/host/linux-x86/clang-stablekern/lib/libc++abi.so.1.0"
 git clone https://github.com/Joe7500/device_xiaomi_chime.git -b $DEVICE_BRANCH device/xiaomi/chime ; check_fail
 git clone https://github.com/Joe7500/vendor_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
