@@ -35,6 +35,7 @@ cleanup_self () {
    cd packages/apps/Updater/ && git reset --hard && cd ../../../
    cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
    rm -rf prebuilts/clang/kernel/linux-x86/clang-stablekern/
+   rm -rf prebuilts/clang/host/linux-x86/clang-stablekern/
    rm -rf hardware/xiaomi/
    rm -rf device/xiaomi/chime/
    rm -rf vendor/xiaomi/chime/
