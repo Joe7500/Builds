@@ -10,7 +10,7 @@ set -v
 
 PACKAGE_NAME=axion
 VARIANT_NAME=user
-DEVICE_BRANCH=lineage-22.2
+DEVICE_BRANCH=lineage-22.2-test
 VENDOR_BRANCH=lineage-22
 XIAOMI_BRANCH=lineage-22.2
 REPO_URL="-u https://github.com/AxionAOSP/android.git -b lineage-22.2 --git-lfs"
