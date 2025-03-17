@@ -8,13 +8,14 @@ cd /tmp/src/android/
 
 set -v
 
-PACKAGE_NAME=crDroidAndroid-14
+PACKAGE_NAME=lineage-20
 VARIANT_NAME=user
-DEVICE_BRANCH=lineage-21
-VENDOR_BRANCH=lineage-21
-XIAOMI_BRANCH=lineage-21
-REPO_URL="-u https://github.com/crdroidandroid/android.git -b 14.0 --git-lfs"
-OTA_SED_STRING="crdroidandroid/android_vendor_crDroidOTA/14.0/{device}.json"
+DEVICE_BRANCH=13.0
+VENDOR_BRANCH=13.0
+XIAOMI_BRANCH=lineage-20
+REPO_URL="-u https://github.com/LineageOS/android.git -b lineage-20.0 --git-lfs"
+OTA_SED_STRING="https://download.lineageos.org/api/v1/{device}/{type}/{incr}"
+OTA_SED_REPLACE_STRING="#https://raw.githubusercontent.com/Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json"
 export BUILD_USERNAME=user
 export BUILD_HOSTNAME=localhost 
 export KBUILD_BUILD_USER=user
@@ -29,7 +30,6 @@ notify_send() {
    curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$MSG `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
    curl -s -d "$MSG `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 }
-
 
 notify_send "Build $PACKAGE_NAME on crave.io started."
 
@@ -87,32 +87,36 @@ rm -rf prebuilts/clang/kernel/linux-x86/clang-stablekern/
 curl -o kernel.tar.xz -L "https://github.com/Joe7500/Builds/releases/download/Stuff/kernel.tar.xz" ; check_fail
 tar xf kernel.tar.xz ; check_fail
 rm -f kernel.tar.xz
-curl -o lineage-22.1.tar.xz -L "https://github.com/Joe7500/Builds/releases/download/Stuff/lineage-22.1.tar.xz" ; check_fail
-tar xf lineage-22.1.tar.xz ; check_fail
-rm -f lineage-22.1.tar.xz
+#curl -o lineage-22.1.tar.xz -L "https://github.com/Joe7500/Builds/releases/download/Stuff/lineage-22.1.tar.xz" ; check_fail
+#tar xf lineage-22.1.tar.xz ; check_fail
+#rm -f lineage-22.1.tar.xz
 curl -o toolchain.tar.xz -L "https://github.com/Joe7500/Builds/releases/download/Stuff/toolchain.tar.xz" ; check_fail
 tar xf toolchain.tar.xz ; check_fail
 rm -f toolchain.tar.xz
-git clone https://github.com/Joe7500/device_xiaomi_chime.git -b $DEVICE_BRANCH device/xiaomi/chime ; check_fail
-git clone https://github.com/Joe7500/vendor_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
+git clone https://github.com/crdroidandroid/android_device_xiaomi_chime.git -b $DEVICE_BRANCH device/xiaomi/chime ; check_fail
+git clone https://github.com/crdroidandroid/android_device_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
 
-patch -f -p 1 < wfdservice.rc.patch ; check_fail
-cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
-patch -f -p 1 < InterfaceController.java.patch ; check_fail
+#patch -f -p 1 < wfdservice.rc.patch ; check_fail
+#cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
+#patch -f -p 1 < InterfaceController.java.patch ; check_fail
 rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
 rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
 rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
 
 cd packages/apps/Updater/ && git reset --hard && cd ../../../
 cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
-cat strings.xml | sed -e "s#$OTA_SED_STRING#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.1
+cat strings.xml | sed -e "s#$OTA_SED_STRING#$OTA_SED_REPLACE_STRING#g" > strings.xml.1
 cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
 check_fail
 
 cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
 mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
+
+cat device/xiaomi/chime/device.mk | grep -v "vendor/lineage-priv/keys/keys.mk" > device/xiaomi/chime/device.mk.1
+mv device/xiaomi/chime/device.mk.1 device/xiaomi/chime/device.mk
+echo 'include vendor/lineage-priv/keys/keys.mk' >> device/xiaomi/chime/device.mk
 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
