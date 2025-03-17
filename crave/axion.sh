@@ -23,8 +23,14 @@ SECONDS=0
 if echo $@ | grep "JJ_SPEC:" ; then export JJ_SPEC=`echo $@ | cut -d ":" -f 2` ; fi
 TG_URL="https://api.telegram.org/bot$TG_TOKEN/sendMessage"
 
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
-curl -s -d "Build $PACKAGE_NAME on crave.io started. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+notify_send() {
+   local MSG
+   MSG="$@"
+   curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$MSG `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
+   curl -s -d "$MSG `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+}
+
+notify_send "Build $PACKAGE_NAME on crave.io started."
 
 # Always clean up. Especially secrets and creds.
 cleanup_self () {
@@ -54,15 +60,13 @@ cleanup_self () {
 check_fail () {
    if [ $? -ne 0 ]; then 
        if ls out/target/product/chime/$PACKAGE_NAME*.zip; then
-	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io softfailed. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
-   	  curl -s -d "Build $PACKAGE_NAME on crave.io softfailed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
-          echo weird. build failed but OTA package exists.
+          notify_send "Build $PACKAGE_NAME on crave.io softfailed."
+          echo "weird. build failed but OTA package exists."
           echo softfail > result.txt
 	  cleanup_self
           exit 1
        else
-	  curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io failed. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
-          curl -s -d "Build $PACKAGE_NAME on crave.io failed. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+          notify_send "Build $PACKAGE_NAME on crave.io failed."
 	  echo "oh no. script failed"
           cleanup_self
 	  echo fail > result.txt
@@ -177,8 +181,7 @@ m bacon -j $(nproc --all)         ; check_fail
 set -v
 
 echo success > result.txt
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
-curl -s -d "Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+notify_send "Build $PACKAGE_NAME on crave.io succeeded"
 
 # Upload to Gofile
 if cp out/target/product/chime/$PACKAGE_NAME*VANILLA*.zip . ; then
@@ -188,8 +191,7 @@ if cp out/target/product/chime/$PACKAGE_NAME*VANILLA*.zip . ; then
     curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
     bash goupload.sh $GO_FILE
     GO_LINK=`cat GOFILE.txt`
-    curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="MD5:$GO_FILE_MD5 JJ_SPEC:$JJ_SPEC `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
-    curl -s -d "$PACKAGE_NAME JJ_SPEC:$JJ_SPEC MD5:$GO_FILE_MD5 $GO_LINK" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+    notify_send "MD5:$GO_FILE_MD5 $GO_LINK"
     rm -f goupload.sh GOFILE.txt
 fi
 
@@ -219,8 +221,7 @@ m bacon -j $(nproc --all)         ; check_fail
 set -v
 
 echo success > result.txt
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
-curl -s -d "Build $PACKAGE_NAME on crave.io succeeded. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+notify_send "Build $PACKAGE_NAME GMS on crave.io succeeded."
 
 if cp out/target/product/chime/$PACKAGE_NAME*GMS*.zip . ; then
     GO_FILE=`ls --color=never -1tr $PACKAGE_NAME*GMS*.zip | tail -1`
@@ -229,14 +230,12 @@ if cp out/target/product/chime/$PACKAGE_NAME*GMS*.zip . ; then
     curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
     bash goupload.sh $GO_FILE
     GO_LINK=`cat GOFILE.txt`
-    curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="MD5:$GO_FILE_MD5 JJ_SPEC:$JJ_SPEC `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
-    curl -s -d "$PACKAGE_NAME JJ_SPEC:$JJ_SPEC MD5:$GO_FILE_MD5 $GO_LINK" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+    notify_send "MD5:$GO_FILE_MD5 $GO_LINK"
     rm -f goupload.sh GOFILE.txt
 fi
 
 TIME_TAKEN=`printf '%dh:%dm:%ds\n' $((SECONDS/3600)) $((SECONDS%3600/60)) $((SECONDS%60))`
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io completed. $TIME_TAKEN. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
-curl -s -d "Build $PACKAGE_NAME on crave.io completed. $TIME_TAKEN. `env LC_ALL="" TZ=Africa/Harare LC_TIME="C.UTF-8" date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+notify_send "Build $PACKAGE_NAME on crave.io completed. $TIME_TAKEN."
 
 # Always clean up.
 cleanup_self
