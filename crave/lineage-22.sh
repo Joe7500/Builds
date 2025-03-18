@@ -8,7 +8,7 @@ cd /tmp/src/android/
 
 set -v
 
-PACKAGE_NAME=lineage-22.1
+PACKAGE_NAME=lineage-22
 VARIANT_NAME=user
 DEVICE_BRANCH=lineage-22.1
 VENDOR_BRANCH=lineage-22
