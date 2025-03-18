@@ -94,7 +94,7 @@ curl -o toolchain.tar.xz -L "https://github.com/Joe7500/Builds/releases/download
 tar xf toolchain.tar.xz ; check_fail
 rm -f toolchain.tar.xz
 git clone https://github.com/crdroidandroid/android_device_xiaomi_chime.git -b $DEVICE_BRANCH device/xiaomi/chime ; check_fail
-git clone https://github.com/crdroidandroid/android_device_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
+git clone https://github.com/crdroidandroid/android_vendor_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
 
 #patch -f -p 1 < wfdservice.rc.patch ; check_fail
