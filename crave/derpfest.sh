@@ -160,7 +160,7 @@ set +v
 source build/envsetup.sh  ; check_fail
 lunch derp_chime-user     ; check_fail
 mka installclean
-#mka derp                  ; check_fail
+mka derp                  ; check_fail
 
 set -v
 
