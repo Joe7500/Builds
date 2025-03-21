@@ -1,28 +1,21 @@
 {
-        "response": [
-                {
-                        "maintainer": "",
-                        "oem": "Xiaomi",
-                        "device": "Redmi 9t/Poco M3",
-                        "filename": "RisingOS_Revived-6.3-250317-0021-GAPPS-COMMUNITY-chime.0220.user.zip",
-                        "download": "https://sourceforge.net/projects/joes-android-builds/files/risingOS/6/RisingOS_Revived-6.3-250317-0021-GAPPS-COMMUNITY-chime.0220.user.zip/download",
-                        "timestamp": 1737893195,
-                        "md5": "7f062ad3aa2b4dd47937b24bbc7b215a",
-                        "sha256": "f45c78db0d1a4d0a407fe22f96c93606a4244d9bd7e85ebc07a0aadd1addb11c",
-                        "size": 2290874628,
-                        "version": "6.3-Celestia",
-                        "buildtype": "STABLE",
-                        "forum": "https://t.me/ayanot69",
-                        "gapps": "",
-                        "firmware": "",
-                        "modem": "",
-                        "bootloader": "",
-                        "recovery": "",
-                        "paypal": "https://www.paypal.me/notayan",
-                        "telegram": "",
-                        "dt": "",
-                        "common-dt": "",
-                        "kernel": ""
-                }
-        ]
+	"response": [
+		{
+			"maintainer": "Joe",
+			"oem": "xiaomi",
+			"device": "Redmi 9t/Poco M3",
+			"filename": "RisingOS_Revived-6.3-250317-0021-GAPPS-COMMUNITY-chime.0220.user.zip",
+			"download": "https://sourceforge.net/projects/joes-android-builds/files/risingOS/6/RisingOS_Revived-6.3-250317-0021-GAPPS-COMMUNITY-chime.0220.user.zip/download",
+			"timestamp": 1742322489,
+			"md5": "7f062ad3aa2b4dd47937b24bbc7b215a",
+			"sha256": "f45c78db0d1a4d0a407fe22f96c93606a4244d9bd7e85ebc07a0aadd1addb11c",
+			"size": 2290874628,
+			"version": "6.3-Celestia",
+			"buildtype": "STABLE",
+			"forum": "",
+			"recovery": "",
+			"paypal": "",
+			"telegram": "https://t.me/joes_stuff"
+		}
+	]
 }
