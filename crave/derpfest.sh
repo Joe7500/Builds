@@ -8,14 +8,14 @@ cd /tmp/src/android/
 
 set -v
 
-PACKAGE_NAME=lineage-21
+PACKAGE_NAME=DerpFest-15
 VARIANT_NAME=user
-DEVICE_BRANCH=lineage-21
-VENDOR_BRANCH=lineage-21
-XIAOMI_BRANCH=lineage-21
-REPO_URL="-u https://github.com/LineageOS/android.git -b lineage-21.0 --git-lfs"
-OTA_SED_STRING="https://download.lineageos.org/api/v1/{device}/{type}/{incr}"
-OTA_SED_REPLACE_STRING="https://raw.githubusercontent.com/Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json"
+DEVICE_BRANCH=lineage-22.1
+VENDOR_BRANCH=lineage-22
+XIAOMI_BRANCH=lineage-22.1
+REPO_URL=" -u https://github.com/DerpFest-AOSP/manifest.git -b 15 --git-lfs"
+OTA_SED_STRING="DerpFest-AOSP/Updater-Stuff/master/{device}.json"
+OTA_SED_REPLACE_STRING="Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json"
 export BUILD_USERNAME=user
 export BUILD_HOSTNAME=localhost 
 export KBUILD_BUILD_USER=user
@@ -114,6 +114,8 @@ check_fail
 cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
 mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
+ 
+exit 0
 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
