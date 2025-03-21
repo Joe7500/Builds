@@ -114,9 +114,22 @@ check_fail
 cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
 mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
- 
-exit 0
 
+cd device/xiaomi/chime/ ; check_fail
+cat lineage_chime.mk | sed -e 's/lineage/derp/g' > lineage_chime.mk.1 ; check_fail
+mv lineage_chime.mk.1 lineage_chime.mk ; check_fail
+cat lineage_chime.mk | grep -v "RESERVE_SPACE_FOR_GAPPS" > lineage_chime.mk.1 ; check_fail
+mv lineage_chime.mk.1 lineage_chime.mk ; check_fail
+echo "RESERVE_SPACE_FOR_GAPPS := false" >> lineage_chime.mk
+cat AndroidProducts.mk | sed -e 's/lineage/derp/g' > AndroidProducts.mk.1 ; check_fail
+mv AndroidProducts.mk.1 AndroidProducts.mk ; check_fail
+cat BoardConfig.mk | sed -e 's#vendor/lineage/config/device_framework_matrix.xml#vendor/derp/config/device_framework_matrix.xml#g' > BoardConfig.mk.1 ; check_fail
+mv BoardConfig.mk.1 BoardConfig.mk ; check_fail
+cat BoardConfig.mk | sed -e 's#device/lineage/sepolicy/libperfmgr/sepolicy.mk#device/derp/sepolicy/libperfmgr/sepolicy.mk#' > BoardConfig.mk.1 ; check_fail
+mv BoardConfig.mk.1 BoardConfig.mk ; check_fail
+mv lineage_chime.mk derp_chime.mk ; check_fail
+cd ../../../ ; check_fail
+ 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
 virtualenv /home/admin/venv ; check_fail
@@ -144,10 +157,10 @@ sleep 15
 
 set +v
 
-source build/envsetup.sh          ; check_fail
-breakfast chime user              ; check_fail
+source build/envsetup.sh  ; check_fail
+lunch derp_chime-user     ; check_fail
 mka installclean
-mka bacon                         ; check_fail
+#mka derp                  ; check_fail
 
 set -v
 
