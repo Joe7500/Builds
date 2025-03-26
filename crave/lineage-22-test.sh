@@ -94,6 +94,7 @@ git clone https://github.com/Joe7500/vendor_xiaomi_chime.git -b $VENDOR_BRANCH v
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
 
 cd device/xiaomi/chime && git reset --hard && git reset --hard f34eba879da7d260a40d0da55f9a0ef52170b119 ; check_fail
+cd -
 
 patch -f -p 1 < wfdservice.rc.patch ; check_fail
 cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
