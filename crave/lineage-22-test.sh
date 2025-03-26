@@ -10,7 +10,7 @@ set -v
 
 PACKAGE_NAME=lineage-22
 VARIANT_NAME=user
-DEVICE_BRANCH=lineage-22.1-wip
+DEVICE_BRANCH=lineage-22.1
 VENDOR_BRANCH=lineage-22.1-wip
 XIAOMI_BRANCH=lineage-22.2
 REPO_URL="-u https://github.com/LineageOS/android.git -b lineage-22.1 --git-lfs"
@@ -93,7 +93,7 @@ git clone https://github.com/Joe7500/device_xiaomi_chime.git -b $DEVICE_BRANCH d
 git clone https://github.com/Joe7500/vendor_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
 
-#cd device/xiaomi/chime && git reset --hard && git reset --hard f34eba879da7d260a40d0da55f9a0ef52170b119 && check_fail
+cd device/xiaomi/chime && git reset --hard && git reset --hard f34eba879da7d260a40d0da55f9a0ef52170b119 && check_fail
 
 patch -f -p 1 < wfdservice.rc.patch ; check_fail
 cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
