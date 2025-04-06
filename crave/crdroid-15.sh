@@ -93,12 +93,12 @@ curl -o test-trees.tar.xz -L "https://github.com/Joe7500/Builds/releases/downloa
 tar xf test-trees.tar.xz 
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
 
-patch -f -p 1 < wfdservice.rc.patch ; check_fail
-cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
-patch -f -p 1 < InterfaceController.java.patch ; check_fail
-rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
-rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
-rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
+#patch -f -p 1 < wfdservice.rc.patch ; check_fail
+#cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
+#patch -f -p 1 < InterfaceController.java.patch ; check_fail
+#rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
+#rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
+#rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
 
 cd packages/apps/Updater/ && git reset --hard && cd ../../../
 cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
@@ -109,7 +109,6 @@ check_fail
 cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
 mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
-
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
 virtualenv /home/admin/venv ; check_fail
