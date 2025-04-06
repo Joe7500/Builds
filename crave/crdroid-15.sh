@@ -12,7 +12,7 @@ PACKAGE_NAME=crDroidAndroid-15
 VARIANT_NAME=user
 DEVICE_BRANCH=lineage-22.1
 VENDOR_BRANCH=lineage-22
-XIAOMI_BRANCH=lineage-22.1
+XIAOMI_BRANCH=lineage-22.2
 REPO_URL="-u https://github.com/crdroidandroid/android.git -b 15.0 --git-lfs"
 export BUILD_USERNAME=user
 export BUILD_HOSTNAME=localhost 
@@ -87,8 +87,10 @@ rm -f lineage-22.1.tar.xz
 curl -o toolchain.tar.xz -L "https://github.com/Joe7500/Builds/releases/download/Stuff/toolchain.tar.xz" ; check_fail
 tar xf toolchain.tar.xz ; check_fail
 rm -f toolchain.tar.xz
-git clone https://github.com/Joe7500/device_xiaomi_chime.git -b $DEVICE_BRANCH device/xiaomi/chime ; check_fail
-git clone https://github.com/Joe7500/vendor_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
+#git clone https://github.com/Joe7500/device_xiaomi_chime.git -b $DEVICE_BRANCH device/xiaomi/chime ; check_fail
+#git clone https://github.com/Joe7500/vendor_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
+curl -o test-trees.tar.xz -L "https://github.com/Joe7500/Builds/releases/download/Stuff/test-trees.tar.xz" ; check_fail
+tar xf test-trees.tar.xz 
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
 
 patch -f -p 1 < wfdservice.rc.patch ; check_fail
