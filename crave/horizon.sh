@@ -101,11 +101,11 @@ git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH
 #rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
 #rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
 
-cd packages/apps/Updater/ && git reset --hard && cd ../../../
-cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
-cat strings.xml | sed -e "s#crdroidandroid/android_vendor_crDroidOTA/15.0/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.1
-cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
-check_fail
+#cd packages/apps/Updater/ && git reset --hard && cd ../../../
+#cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
+#cat strings.xml | sed -e "s#crdroidandroid/android_vendor_crDroidOTA/15.0/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.1
+#cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
+#check_fail
 
 cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
 mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
