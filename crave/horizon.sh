@@ -138,9 +138,9 @@ sleep 15
 set +v
 
 source build/envsetup.sh          ; check_fail
-breakfast chime user              ; check_fail
+lunch horizon_chime-bp1a-user     ; check_fail
 mka installclean
-mka bacon                         ; check_fail
+mka horizon -j `nproc`            ; check_fail
 
 set -v
 
