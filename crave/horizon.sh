@@ -110,6 +110,22 @@ git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH
 cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
 mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
+
+cd device/xiaomi/chime/ ; check_fail
+cat lineage_chime.mk | sed -e 's/lineage/horizon/g' > lineage_chime.mk.1 ; check_fail
+mv lineage_chime.mk.1 lineage_chime.mk ; check_fail
+cat lineage_chime.mk | grep -v "RESERVE_SPACE_FOR_GAPPS" > lineage_chime.mk.1 ; check_fail
+mv lineage_chime.mk.1 lineage_chime.mk ; check_fail
+echo "RESERVE_SPACE_FOR_GAPPS := false" >> lineage_chime.mk
+cat AndroidProducts.mk | sed -e 's/lineage/horizon/g' > AndroidProducts.mk.1 ; check_fail
+mv AndroidProducts.mk.1 AndroidProducts.mk ; check_fail
+cat BoardConfig.mk | sed -e 's#vendor/lineage/config/device_framework_matrix.xml#vendor/horizon/config/device_framework_matrix.xml#g' > BoardConfig.mk.1 ; check_fail
+mv BoardConfig.mk.1 BoardConfig.mk ; check_fail
+#cat BoardConfig.mk | sed -e 's#device/lineage/sepolicy/libperfmgr/sepolicy.mk#device/horizon/sepolicy/libperfmgr/sepolicy.mk#' > BoardConfig.mk.1 ; check_fail
+#mv BoardConfig.mk.1 BoardConfig.mk ; check_fail
+mv lineage_chime.mk horizon_chime.mk ; check_fail
+cd ../../../ ; check_fail
+
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
 virtualenv /home/admin/venv ; check_fail
