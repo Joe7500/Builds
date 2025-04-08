@@ -125,6 +125,7 @@ mv BoardConfig.mk.1 BoardConfig.mk ; check_fail
 #mv BoardConfig.mk.1 BoardConfig.mk ; check_fail
 mv lineage_chime.mk horizon_chime.mk ; check_fail
 cd ../../../ ; check_fail
+rm -rf hardware/xiaomi/megvii
 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
