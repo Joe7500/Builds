@@ -10,9 +10,9 @@ set -v
 
 PACKAGE_NAME=lineage-22
 VARIANT_NAME=user
-DEVICE_BRANCH=lineage-22.1
-VENDOR_BRANCH=lineage-22
-XIAOMI_BRANCH=lineage-22.1
+DEVICE_BRANCH=lineage-22.2
+VENDOR_BRANCH=lineage-22.2
+XIAOMI_BRANCH=lineage-22.2
 REPO_URL="-u https://github.com/LineageOS/android.git -b lineage-22.1 --git-lfs"
 export BUILD_USERNAME=user
 export BUILD_HOSTNAME=localhost 
