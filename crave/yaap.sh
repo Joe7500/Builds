@@ -123,7 +123,12 @@ mv device.mk.1 device.mk
 cat device.mk | sed -e 's/vendor.lineage.livedisplay@2.0-service-sdm/android.hardware.keymaster@4.1.vendor/g' > device.mk.1
 mv device.mk.1 device.mk
 echo "TARGET_BOARD_PLATFORM := bengal" >> device.mk
-mv lineage_chime.mk yaap_chime.mk      
+mv lineage_chime.mk yaap_chime.mk 
+export WITH_GMS=true
+echo "WITH_GMS := true" >> yaap_chime.mk
+cat yaap_chime.mk | set -e 's/RESERVE_SPACE_FOR_GAPPS//g' > yaap_chime.mk.1
+echo "RESERVE_SPACE_FOR_GAPPS := false" >> yaap_chime.mk.1
+mv yaap_chime.mk.1 yaap_chime.mk
 cd ../../../ ; check_fail
 rm -rf hardware/xiaomi/megvii
 
