@@ -154,9 +154,9 @@ sleep 15
 set +v
 
 source build/envsetup.sh          ; check_fail
-breakfast chime user              ; check_fail
+lunch yaap_device-user            ; check_fail
 mka installclean
-mka bacon                         ; check_fail
+m yaap -j16                       ; check_fail
 
 set -v
 
