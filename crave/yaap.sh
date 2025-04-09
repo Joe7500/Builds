@@ -126,6 +126,7 @@ echo "TARGET_BOARD_PLATFORM := bengal" >> device.mk
 mv lineage_chime.mk yaap_chime.mk 
 export WITH_GMS=true
 echo "WITH_GMS := true" >> yaap_chime.mk
+echo "TARGET_BUILD_GAPPS := true" >> yaap_chime.mk
 cat yaap_chime.mk | sed -e 's/RESERVE_SPACE_FOR_GAPPS//g' > yaap_chime.mk.1
 echo "RESERVE_SPACE_FOR_GAPPS := false" >> yaap_chime.mk.1
 mv yaap_chime.mk.1 yaap_chime.mk
