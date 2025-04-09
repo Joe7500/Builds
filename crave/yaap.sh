@@ -125,6 +125,7 @@ mv device.mk.1 device.mk
 echo "TARGET_BOARD_PLATFORM := bengal" >> device.mk
 mv lineage_chime.mk yaap_chime.mk      
 cd ../../../ ; check_fail
+rm -rf hardware/xiaomi/megvii
 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
