@@ -8,12 +8,12 @@ cd /tmp/src/android/
 
 set -v
 
-PACKAGE_NAME=lineage-22
+PACKAGE_NAME=YAAP
 VARIANT_NAME=user
 DEVICE_BRANCH=lineage-22.2
 VENDOR_BRANCH=lineage-22.2
 XIAOMI_BRANCH=lineage-22.2
-REPO_URL="-u https://github.com/LineageOS/android.git -b lineage-22.2 --git-lfs"
+REPO_URL="-u https://github.com/yaap/manifest.git -b fifteen --git-lfs"
 export BUILD_USERNAME=user
 export BUILD_HOSTNAME=localhost 
 export KBUILD_BUILD_USER=user
