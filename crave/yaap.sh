@@ -93,18 +93,18 @@ git clone https://github.com/Joe7500/device_xiaomi_chime.git -b $DEVICE_BRANCH d
 git clone https://github.com/Joe7500/vendor_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
 
-patch -f -p 1 < wfdservice.rc.patch ; check_fail
-cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
-patch -f -p 1 < InterfaceController.java.patch ; check_fail
-rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
-rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
-rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
+#patch -f -p 1 < wfdservice.rc.patch ; check_fail
+#cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
+#patch -f -p 1 < InterfaceController.java.patch ; check_fail
+#rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
+#rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
+#rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
 
-cd packages/apps/Updater/ && git reset --hard && cd ../../../
-cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
-cat strings.xml | sed -e "s#https://download.lineageos.org/api/v1/{device}/{type}/{incr}#https://raw.githubusercontent.com/Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.1
-cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
-check_fail
+#cd packages/apps/Updater/ && git reset --hard && cd ../../../
+#cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
+#cat strings.xml | sed -e "s#https://download.lineageos.org/api/v1/{device}/{type}/{incr}#https://raw.githubusercontent.com/Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.1
+#cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
+#check_fail
 
 cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
 mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
