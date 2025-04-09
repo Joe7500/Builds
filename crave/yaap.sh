@@ -110,6 +110,22 @@ cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > d
 mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
 
+cd device/xiaomi/chime; check_fail
+cat AndroidProducts.mk | sed -e 's/lineage/yaap/g' > AndroidProducts.mk.1
+mv AndroidProducts.mk.1 AndroidProducts.mk
+cat lineage_chime.mk | sed -e 's/lineage/yaap/g' > lineage_chime.mk.1
+mv lineage_chime.mk.1 lineage_chime.mk
+#echo "WITH_GMS := true" >> lineage_chime.mk
+cat BoardConfig.mk | sed -e 's#vendor/lineage/config/device_framework_matrix.xml#vendor/yaap/config/device_framework_matrix.xml#g' > BoardConfig.mk.1
+mv BoardConfig.mk.1 BoardConfig.mk
+cat device.mk | sed -e 's/android.hardware.keymaster@4.1.vendor//g' > device.mk.1
+mv device.mk.1 device.mk
+cat device.mk | sed -e 's/vendor.lineage.livedisplay@2.0-service-sdm/android.hardware.keymaster@4.1.vendor/g' > device.mk.1
+mv device.mk.1 device.mk
+echo "TARGET_BOARD_PLATFORM := bengal" >> device.mk
+mv lineage_chime.mk yaap_chime.mk      
+cd ../../../ ; check_fail
+
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
 virtualenv /home/admin/venv ; check_fail
