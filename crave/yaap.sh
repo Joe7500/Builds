@@ -137,6 +137,8 @@ mv BoardConfig.mk.1 BoardConfig.mk
 cd ../../../ ; check_fail
 rm -rf hardware/xiaomi/megvii
 
+exit 0
+
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
 virtualenv /home/admin/venv ; check_fail
