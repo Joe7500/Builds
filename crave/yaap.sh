@@ -130,6 +130,11 @@ echo "TARGET_BUILD_GAPPS := true" >> yaap_chime.mk
 cat yaap_chime.mk | grep -v RESERVE_SPACE_FOR_GAPPS > yaap_chime.mk.1
 echo "RESERVE_SPACE_FOR_GAPPS := false" >> yaap_chime.mk.1
 mv yaap_chime.mk.1 yaap_chime.mk
+cat device.mk | sed -e 's/TARGET_BUILD_VARIANT),user/TARGET_BUILD_VARIANT),useignore/g)' > device.mk.1
+mv device.mk.1 device.mk
+cat BoardConfig.mk | sed -e 's/TARGET_BUILD_VARIANT),user/TARGET_BUILD_VARIANT),useignore/g)' > BoardConfig.mk.1
+mv BoardConfig.mk.1 BoardConfig.mk
+mv device.mk.1 device.mk
 cd ../../../ ; check_fail
 rm -rf hardware/xiaomi/megvii
 
