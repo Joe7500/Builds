@@ -165,9 +165,9 @@ sleep 15
 set +v
 
 source build/envsetup.sh          ; check_fail
-lunch yaap_chime-user             ; check_fail
+WITH_DEXPREOPT=false ART_BOOT_IMAGE_EXTRA_ARGS="--runtime-arg -verbose:verifier" TARGET_BUILD_GAPPS=true lunch yaap_chime-user             ; check_fail
 mka installclean
-m yaap -j16                       ; check_fail
+WITH_DEXPREOPT=false ART_BOOT_IMAGE_EXTRA_ARGS="--runtime-arg -verbose:verifier" TARGET_BUILD_GAPPS=true m yaap -j16                       ; check_fail
 
 set -v
 
