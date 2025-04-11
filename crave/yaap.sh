@@ -122,7 +122,7 @@ cat device.mk | sed -e 's/android.hardware.keymaster@4.1.vendor//g' > device.mk.
 mv device.mk.1 device.mk
 cat device.mk | sed -e 's/vendor.lineage.livedisplay@2.0-service-sdm/android.hardware.keymaster@4.1.vendor/g' > device.mk.1
 mv device.mk.1 device.mk
-echo "TARGET_BOARD_PLATFORM := bengal" >> device.mk
+#echo "TARGET_BOARD_PLATFORM := bengal" >> device.mk
 mv lineage_chime.mk yaap_chime.mk 
 export WITH_GMS=true
 echo "WITH_GMS := true" >> yaap_chime.mk
