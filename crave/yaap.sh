@@ -139,7 +139,8 @@ cd device/xiaomi/chime/configs/props
 cat vendor.prop | grep -v ro.soc.manufacturer > vendor.prop.1
 mv vendor.prop.1 vendor.prop
 cd ../../../../../
-
+rm -f vendor/qcom/opensource/power/power.xml
+rm -f out/target/product/chime//vendor/etc/vintf/manifest/power.xml
 rm -rf hardware/xiaomi/megvii
 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
