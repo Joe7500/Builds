@@ -135,6 +135,11 @@ mv device.mk.1 device.mk
 cat BoardConfig.mk | sed -e 's/TARGET_BUILD_VARIANT),user/TARGET_BUILD_VARIANT),useignore/g' > BoardConfig.mk.1
 mv BoardConfig.mk.1 BoardConfig.mk
 cd ../../../ ; check_fail
+cd device/xiaomi/chime/configs/props
+cat vendor.prop | grep -v ro.soc.manufacturer > vendor.prop.1
+mv vendor.prop.1 vendor.prop
+cd ../../../../../
+
 rm -rf hardware/xiaomi/megvii
 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
