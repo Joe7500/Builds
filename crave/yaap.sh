@@ -142,6 +142,11 @@ cd ../../../../../
 rm -f vendor/qcom/opensource/power/power.xml
 rm -f out/target/product/chime//vendor/etc/vintf/manifest/power.xml
 rm -rf hardware/xiaomi/megvii
+cat vendor/yaap/config/common.mk | grep -v 'call inherit-product, device/qcom/common/common.mk' > vendor/yaap/config/common.mk.1
+mv vendor/yaap/config/common.mk.1 vendor/yaap/config/common.mk
+cat vendor/yaap/config/common.mk | grep -v 'TARGET_EXCLUDE_QCOM_SEPOLICY' > vendor/yaap/config/common.mk.1
+mv vendor/yaap/config/common.mk.1 vendor/yaap/config/common.mk
+
 
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
