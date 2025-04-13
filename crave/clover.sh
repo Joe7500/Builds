@@ -126,6 +126,7 @@ echo "TARGET_BUILD_GAPPS := true" >> clover_chime.mk
 cat clover_chime.mk | grep -v RESERVE_SPACE_FOR_GAPPS > clover_chime.mk.1
 echo "RESERVE_SPACE_FOR_GAPPS := false" >> clover_chime.mk.1
 mv clover_chime.mk.1 clover_chime.mk
+cd ../../../
 
 cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
 mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
