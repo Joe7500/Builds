@@ -8,12 +8,12 @@ cd /tmp/src/android/
 
 set -v
 
-PACKAGE_NAME=crDroidAndroid-15
+PACKAGE_NAME=lineage-22
 VARIANT_NAME=user
 DEVICE_BRANCH=lineage-22.2
 VENDOR_BRANCH=lineage-22.2
 XIAOMI_BRANCH=lineage-22.2
-REPO_URL="-u https://github.com/crdroidandroid/android.git -b 15.0 --git-lfs"
+REPO_URL="-u https://github.com/The-Clover-Project/manifest.git -b 15-qpr2 --git-lfs"
 export BUILD_USERNAME=user
 export BUILD_HOSTNAME=localhost 
 export KBUILD_BUILD_USER=user
@@ -39,10 +39,12 @@ cleanup_self () {
    rm -rf device/xiaomi/chime/
    rm -rf vendor/xiaomi/chime/
    rm -rf kernel/xiaomi/chime/
-   rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml* builder.sh goupload.sh GOFILE.txt
+   rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml*
+   rm -f builder.sh
    rm -rf /tmp/android-certs*
    rm -rf /home/admin/venv/
    rm -rf custom_scripts/
+   rm -f goupload.sh GOFILE.txt
 }
 
 check_fail () {
@@ -89,29 +91,46 @@ tar xf toolchain.tar.xz ; check_fail
 rm -f toolchain.tar.xz
 git clone https://github.com/Joe7500/device_xiaomi_chime.git -b $DEVICE_BRANCH device/xiaomi/chime ; check_fail
 git clone https://github.com/Joe7500/vendor_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
-#curl -o test-trees.tar.xz -L "https://github.com/Joe7500/Builds/releases/download/Stuff/test-trees.tar.xz" ; check_fail
-#tar xf test-trees.tar.xz 
-#rm -f test-trees.tar.xz
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
 
-#patch -f -p 1 < wfdservice.rc.patch ; check_fail
-#cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
-#patch -f -p 1 < InterfaceController.java.patch ; check_fail
-#rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
-#rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
-#rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
+patch -f -p 1 < wfdservice.rc.patch ; check_fail
+cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
+patch -f -p 1 < InterfaceController.java.patch ; check_fail
+rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
+rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
+rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
 
 cd packages/apps/Updater/ && git reset --hard && cd ../../../
 cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
-cat strings.xml | sed -e "s#crdroidandroid/android_vendor_crDroidOTA/15.0/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.1
+cat strings.xml | sed -e "s#https://download.lineageos.org/api/v1/{device}/{type}/{incr}#https://raw.githubusercontent.com/Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.1
 cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
 check_fail
 
-rm -rf hardware/xiaomi/megvii
+cd device/xiaomi/chime; check_fail
+cat AndroidProducts.mk | sed -e 's/lineage/clover/g' > AndroidProducts.mk.1
+mv AndroidProducts.mk.1 AndroidProducts.mk
+cat lineage_chime.mk | sed -e 's/lineage/clover/g' > lineage_chime.mk.1
+mv lineage_chime.mk.1 lineage_chime.mk
+#echo "WITH_GMS := true" >> lineage_chime.mk
+cat BoardConfig.mk | sed -e 's#vendor/lineage/config/device_framework_matrix.xml#vendor/clover/config/device_framework_matrix.xml#g' > BoardConfig.mk.1
+mv BoardConfig.mk.1 BoardConfig.mk
+cat device.mk | sed -e 's/android.hardware.keymaster@4.1.vendor//g' > device.mk.1
+mv device.mk.1 device.mk
+cat device.mk | sed -e 's/vendor.lineage.livedisplay@2.0-service-sdm/android.hardware.keymaster@4.1.vendor/g' > device.mk.1
+mv device.mk.1 device.mk
+#echo "TARGET_BOARD_PLATFORM := bengal" >> device.mk
+mv lineage_chime.mk clover_chime.mk 
+export WITH_GMS=true
+echo "WITH_GMS := true" >> clover_chime.mk
+echo "TARGET_BUILD_GAPPS := true" >> clover_chime.mk
+cat clover_chime.mk | grep -v RESERVE_SPACE_FOR_GAPPS > clover_chime.mk.1
+echo "RESERVE_SPACE_FOR_GAPPS := false" >> clover_chime.mk.1
+mv clover_chime.mk.1 clover_chime.mk
 
 cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
 mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
+
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
 virtualenv /home/admin/venv ; check_fail
@@ -147,8 +166,8 @@ mka bacon                         ; check_fail
 set -v
 
 echo success > result.txt
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
-curl -s -d "Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
+curl -s -d "Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC MORE_STUFF" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
 cp out/target/product/chime/$PACKAGE_NAME*.zip .
 GO_FILE=`ls -1tr $PACKAGE_NAME*.zip | tail -1`

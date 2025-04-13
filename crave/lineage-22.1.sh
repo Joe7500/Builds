@@ -8,12 +8,12 @@ cd /tmp/src/android/
 
 set -v
 
-PACKAGE_NAME=crDroidAndroid-15
+PACKAGE_NAME=lineage-22.1
 VARIANT_NAME=user
-DEVICE_BRANCH=lineage-22.2
-VENDOR_BRANCH=lineage-22.2
-XIAOMI_BRANCH=lineage-22.2
-REPO_URL="-u https://github.com/crdroidandroid/android.git -b 15.0 --git-lfs"
+DEVICE_BRANCH=lineage-22.1
+VENDOR_BRANCH=lineage-22
+XIAOMI_BRANCH=lineage-22.1
+REPO_URL="-u https://github.com/accupara/los22.git -b lineage-22.1 --git-lfs"
 export BUILD_USERNAME=user
 export BUILD_HOSTNAME=localhost 
 export KBUILD_BUILD_USER=user
@@ -39,10 +39,12 @@ cleanup_self () {
    rm -rf device/xiaomi/chime/
    rm -rf vendor/xiaomi/chime/
    rm -rf kernel/xiaomi/chime/
-   rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml* builder.sh goupload.sh GOFILE.txt
+   rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml*
+   rm -f builder.sh
    rm -rf /tmp/android-certs*
    rm -rf /home/admin/venv/
    rm -rf custom_scripts/
+   rm -f goupload.sh GOFILE.txt
 }
 
 check_fail () {
@@ -77,7 +79,7 @@ rm -rf kernel/xiaomi/chime/
 rm -rf vendor/xiaomi/chime/
 rm -rf device/xiaomi/chime/
 rm -rf hardware/xiaomi/
-rm -rf prebuilts/clang/host/linux-x86/clang-stablekern/
+rm -rf prebuilts/clang/kernel/linux-x86/clang-stablekern/
 curl -o kernel.tar.xz -L "https://github.com/Joe7500/Builds/releases/download/Stuff/kernel.tar.xz" ; check_fail
 tar xf kernel.tar.xz ; check_fail
 rm -f kernel.tar.xz
@@ -89,29 +91,25 @@ tar xf toolchain.tar.xz ; check_fail
 rm -f toolchain.tar.xz
 git clone https://github.com/Joe7500/device_xiaomi_chime.git -b $DEVICE_BRANCH device/xiaomi/chime ; check_fail
 git clone https://github.com/Joe7500/vendor_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
-#curl -o test-trees.tar.xz -L "https://github.com/Joe7500/Builds/releases/download/Stuff/test-trees.tar.xz" ; check_fail
-#tar xf test-trees.tar.xz 
-#rm -f test-trees.tar.xz
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
 
-#patch -f -p 1 < wfdservice.rc.patch ; check_fail
-#cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
-#patch -f -p 1 < InterfaceController.java.patch ; check_fail
-#rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
-#rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
-#rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
+patch -f -p 1 < wfdservice.rc.patch ; check_fail
+cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
+patch -f -p 1 < InterfaceController.java.patch ; check_fail
+rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
+rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
+rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
 
 cd packages/apps/Updater/ && git reset --hard && cd ../../../
 cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
-cat strings.xml | sed -e "s#crdroidandroid/android_vendor_crDroidOTA/15.0/{device}.json#Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.1
+cat strings.xml sed -e "s#https://download.lineageos.org/api/v1/{device}/{type}/{incr}#https://raw.githubusercontent.com/Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.1
 cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
 check_fail
-
-rm -rf hardware/xiaomi/megvii
 
 cat device/xiaomi/chime/BoardConfig.mk | grep -v TARGET_KERNEL_CLANG_VERSION > device/xiaomi/chime/BoardConfig.mk.1
 mv device/xiaomi/chime/BoardConfig.mk.1 device/xiaomi/chime/BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
+
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
 virtualenv /home/admin/venv ; check_fail
@@ -147,8 +145,8 @@ mka bacon                         ; check_fail
 set -v
 
 echo success > result.txt
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
-curl -s -d "Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1 
+curl -s -d "Build $PACKAGE_NAME GAPPS on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC MORE_STUFF" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 
 cp out/target/product/chime/$PACKAGE_NAME*.zip .
 GO_FILE=`ls -1tr $PACKAGE_NAME*.zip | tail -1`
