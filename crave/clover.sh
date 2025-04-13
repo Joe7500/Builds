@@ -8,7 +8,7 @@ cd /tmp/src/android/
 
 set -v
 
-PACKAGE_NAME=lineage-22
+PACKAGE_NAME=CloverProject
 VARIANT_NAME=user
 DEVICE_BRANCH=lineage-22.2
 VENDOR_BRANCH=lineage-22.2
