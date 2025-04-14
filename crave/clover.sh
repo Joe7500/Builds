@@ -162,7 +162,7 @@ set +v
 source build/envsetup.sh          ; check_fail
 breakfast chime user              ; check_fail
 mka installclean
-mka bacon                         ; check_fail
+mka clover -j 16                  ; check_fail
 
 set -v
 
