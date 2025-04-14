@@ -93,18 +93,18 @@ git clone https://github.com/Joe7500/device_xiaomi_chime.git -b $DEVICE_BRANCH d
 git clone https://github.com/Joe7500/vendor_xiaomi_chime.git -b $VENDOR_BRANCH vendor/xiaomi/chime ; check_fail
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
 
-patch -f -p 1 < wfdservice.rc.patch ; check_fail
-cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
-patch -f -p 1 < InterfaceController.java.patch ; check_fail
-rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
-rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
-rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
+#patch -f -p 1 < wfdservice.rc.patch ; check_fail
+#cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
+#patch -f -p 1 < InterfaceController.java.patch ; check_fail
+#rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
+#rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
+#rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
 
-cd packages/apps/Updater/ && git reset --hard && cd ../../../
-cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
-cat strings.xml | sed -e "s#https://download.lineageos.org/api/v1/{device}/{type}/{incr}#https://raw.githubusercontent.com/Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.1
-cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
-check_fail
+#cd packages/apps/Updater/ && git reset --hard && cd ../../../
+#cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
+#cat strings.xml | sed -e "s#https://download.lineageos.org/api/v1/{device}/{type}/{incr}#https://raw.githubusercontent.com/Joe7500/Builds/main/$PACKAGE_NAME.$VARIANT_NAME.chime.json#g" > strings.xml.1
+#cp strings.xml.1 packages/apps/Updater/app/src/main/res/values/strings.xml
+#check_fail
 
 cd device/xiaomi/chime; check_fail
 cat AndroidProducts.mk | sed -e 's/lineage/clover/g' > AndroidProducts.mk.1
@@ -112,12 +112,12 @@ mv AndroidProducts.mk.1 AndroidProducts.mk
 cat lineage_chime.mk | sed -e 's/lineage/clover/g' > lineage_chime.mk.1
 mv lineage_chime.mk.1 lineage_chime.mk
 #echo "WITH_GMS := true" >> lineage_chime.mk
-cat BoardConfig.mk | sed -e 's#vendor/lineage/config/device_framework_matrix.xml#vendor/clover/config/device_framework_matrix.xml#g' > BoardConfig.mk.1
-mv BoardConfig.mk.1 BoardConfig.mk
-cat device.mk | sed -e 's/android.hardware.keymaster@4.1.vendor//g' > device.mk.1
-mv device.mk.1 device.mk
-cat device.mk | sed -e 's/vendor.lineage.livedisplay@2.0-service-sdm/android.hardware.keymaster@4.1.vendor/g' > device.mk.1
-mv device.mk.1 device.mk
+#cat BoardConfig.mk | sed -e 's#vendor/lineage/config/device_framework_matrix.xml#vendor/clover/config/device_framework_matrix.xml#g' > BoardConfig.mk.1
+#mv BoardConfig.mk.1 BoardConfig.mk
+#cat device.mk | sed -e 's/android.hardware.keymaster@4.1.vendor//g' > device.mk.1
+#mv device.mk.1 device.mk
+#cat device.mk | sed -e 's/vendor.lineage.livedisplay@2.0-service-sdm/android.hardware.keymaster@4.1.vendor/g' > device.mk.1
+#mv device.mk.1 device.mk
 #echo "TARGET_BOARD_PLATFORM := bengal" >> device.mk
 mv lineage_chime.mk clover_chime.mk 
 export WITH_GMS=true
