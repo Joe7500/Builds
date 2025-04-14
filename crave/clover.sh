@@ -112,8 +112,8 @@ mv AndroidProducts.mk.1 AndroidProducts.mk
 cat lineage_chime.mk | sed -e 's/lineage/clover/g' > lineage_chime.mk.1
 mv lineage_chime.mk.1 lineage_chime.mk
 #echo "WITH_GMS := true" >> lineage_chime.mk
-#cat BoardConfig.mk | sed -e 's#vendor/lineage/config/device_framework_matrix.xml#vendor/clover/config/device_framework_matrix.xml#g' > BoardConfig.mk.1
-#mv BoardConfig.mk.1 BoardConfig.mk
+cat BoardConfig.mk | sed -e 's#vendor/lineage/config/device_framework_matrix.xml#vendor/clover/config/device_framework_matrix.xml#g' > BoardConfig.mk.1
+mv BoardConfig.mk.1 BoardConfig.mk
 #cat device.mk | sed -e 's/android.hardware.keymaster@4.1.vendor//g' > device.mk.1
 #mv device.mk.1 device.mk
 #cat device.mk | sed -e 's/vendor.lineage.livedisplay@2.0-service-sdm/android.hardware.keymaster@4.1.vendor/g' > device.mk.1
