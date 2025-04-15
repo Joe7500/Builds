@@ -100,6 +100,7 @@ rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
 rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
 rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
 cd device/xiaomi
+rm -rf wfd-device/ ; rm -rf wfd-vendor/
 git clone https://github.com/AOSPA/android_device_qcom_common.git wfd-device
 git clone https://github.com/ThankYouMario/proprietary_vendor_qcom_common.git wfd-vendor
 cd wfd-device/
