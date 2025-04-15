@@ -94,11 +94,25 @@ git clone https://github.com/Joe7500/vendor_xiaomi_chime.git -b $VENDOR_BRANCH v
 git clone https://github.com/LineageOS/android_hardware_xiaomi -b $XIAOMI_BRANCH hardware/xiaomi ; check_fail
 
 #patch -f -p 1 < wfdservice.rc.patch ; check_fail
-#cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
-#patch -f -p 1 < InterfaceController.java.patch ; check_fail
-#rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
-#rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
-#rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
+cd packages/modules/Connectivity/ && git reset --hard && cd ../../../
+patch -f -p 1 < InterfaceController.java.patch ; check_fail
+rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
+rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
+rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
+cd device/xiaomi
+git clone https://github.com/AOSPA/android_device_qcom_common.git wfd-device
+git clone https://github.com/ThankYouMario/proprietary_vendor_qcom_common.git wfd-vendor
+cd wfd-device/
+rm -rf *
+git restore -- system/wfd
+cd ..
+cd wfd-vendor/
+rm -rf *
+git restore -- system/wfd
+cd ..
+echo "include device/xiaomi/wfd-device/system/wfd/qti-wfd.mk" >> chime/device.mk
+echo "include device/xiaomi/wfd-vendor/system/wfd/wfd-vendor.mk" >> chime/device.mk
+cd ../../
 
 #cd packages/apps/Updater/ && git reset --hard && cd ../../../
 #cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
