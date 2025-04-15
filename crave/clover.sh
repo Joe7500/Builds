@@ -99,21 +99,12 @@ patch -f -p 1 < InterfaceController.java.patch ; check_fail
 rm -f InterfaceController.java.patch wfdservice.rc.patch strings.xml.*
 rm -f vendor/xiaomi/chime/proprietary/system_ext/etc/init/wfdservice.rc.rej
 rm -f packages/modules/Connectivity/staticlibs/device/com/android/net/module/util/ip/InterfaceController.java.rej
-cd device/xiaomi
-rm -rf wfd-device/ ; rm -rf wfd-vendor/
-git clone https://github.com/AOSPA/android_device_qcom_common.git wfd-device
-git clone https://github.com/ThankYouMario/proprietary_vendor_qcom_common.git wfd-vendor
-cd wfd-device/
-rm -rf *
-git restore -- system/wfd
-cd ..
-cd wfd-vendor/
-rm -rf *
-git restore -- system/wfd
-cd ..
-echo "include device/xiaomi/wfd-device/system/wfd/qti-wfd.mk" >> chime/device.mk
-echo "include device/xiaomi/wfd-vendor/system/wfd/wfd-vendor.mk" >> chime/device.mk
-cd ../../
+rm -rf device/xiaomi/chime-wfd/
+curl -o chime-wfd.tar.xz https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/chime-wfd.tar.xz
+tar xf chime-wfd.tar.xz
+rm -f chime-wfd.tar.xz
+bash device/xiaomi/chime-wfd/setup.sh
+rm -rf device/xiaomi/wfd*
 
 #cd packages/apps/Updater/ && git reset --hard && cd ../../../
 #cp packages/apps/Updater/app/src/main/res/values/strings.xml strings.xml
