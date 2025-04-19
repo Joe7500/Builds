@@ -10,10 +10,10 @@ set -v
 
 PACKAGE_NAME=RisingOS
 VARIANT_NAME=user
-DEVICE_BRANCH=lineage-22.1
-VENDOR_BRANCH=lineage-22
-XIAOMI_BRANCH=lineage-22.1
-REPO_URL="-u https://github.com/RisingOS-Revived/android -b fifteen --git-lfs"
+DEVICE_BRANCH=lineage-22.2
+VENDOR_BRANCH=lineage-22.2
+XIAOMI_BRANCH=lineage-22.2
+REPO_URL="-u https://github.com/RisingOS-Revived/android -b qpr2 --git-lfs"
 export RISING_MAINTAINER="Joe"
 export BUILD_USERNAME=user
 export BUILD_HOSTNAME=localhost 
@@ -119,6 +119,8 @@ cp strings.xml.backup.orig.txt strings.xml
 cp -f strings.xml packages/apps/Updater/app/src/main/res/values/strings.xml
 rm -f strings.xml.*
 check_fail
+
+rm -rf hardware/xiaomi/megvii
 
 sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*$//g' device/xiaomi/chime/BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
