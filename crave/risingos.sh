@@ -195,6 +195,8 @@ rm -f goupload.sh GOFILE.txt
 cp $GO_FILE $GO_FILE.new.zip
 rm -f $GO_FILE
 
+cd out/target/product && mv chime vanilla && cd ../../..
+
 # BEGIN GAPPS
 
 cd device/xiaomi/chime && git reset --hard ; check_fail
