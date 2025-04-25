@@ -125,6 +125,8 @@ rm -rf hardware/xiaomi/megvii
 sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*$//g' device/xiaomi/chime/BoardConfig.mk
 echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> device/xiaomi/chime/BoardConfig.mk
 
+cd vendor/rising/config && cat rising.mk | sed -e 's#include vendor/microg/products/gms.mk#-include vendor/microg/products/nope.mk#g' > rising.mk.1 && mv rising.mk.1 rising.mk && cd -
+
 sudo apt --yes install python3-virtualenv virtualenv python3-pip-whl
 rm -rf /home/admin/venv
 virtualenv /home/admin/venv ; check_fail
