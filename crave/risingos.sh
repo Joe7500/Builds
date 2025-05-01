@@ -158,7 +158,7 @@ export RISING_MAINTAINER="Joe"
 cat lineage_chime.mk | grep -v "RESERVE_SPACE_FOR_GAPPS" > lineage_chime.mk.1
 mv lineage_chime.mk.1 lineage_chime.mk
 echo "RESERVE_SPACE_FOR_GAPPS := false" >> lineage_chime.mk
-echo "TARGET_PREBUILT_LAWNCHAIR_LAUNCHER := true" >> lineage_chime.mk
+#echo "TARGET_PREBUILT_LAWNCHAIR_LAUNCHER := false" >> lineage_chime.mk
 echo 'RISING_MAINTAINER := Joe' >> lineage_chime.mk
 echo 'RISING_MAINTAINER="Joe"' >> lineage_chime.mk
 echo 'PRODUCT_BUILD_PROP_OVERRIDES += \
