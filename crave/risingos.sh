@@ -151,55 +151,6 @@ unset KEY_PASSWORD
 cat /tmp/crave_bashrc | grep -vE "BKEY_ID|BUCKET_NAME|KEY_ENCRYPTION_PASSWORD|BAPP_KEY|TG_CID|TG_TOKEN" > /tmp/crave_bashrc.1
 mv /tmp/crave_bashrc.1 /tmp/crave_bashrc
 
-# BEGIN VANILLA
-
-cd device/xiaomi/chime && git reset --hard ; check_fail
-export RISING_MAINTAINER="Joe"
-cat lineage_chime.mk | grep -v "RESERVE_SPACE_FOR_GAPPS" > lineage_chime.mk.1
-mv lineage_chime.mk.1 lineage_chime.mk
-echo "RESERVE_SPACE_FOR_GAPPS := true" >> lineage_chime.mk
-echo 'RISING_MAINTAINER="Joe"' >> lineage_chime.mk
-echo 'RISING_MAINTAINER := Joe'  >> lineage_chime.mk
-echo 'PRODUCT_BUILD_PROP_OVERRIDES += \
-    RisingChipset="Chime" \
-    RisingMaintainer="Joe"' >> lineage_chime.mk
-echo 'WITH_GMS := false' >> lineage_chime.mk
-echo 'PRODUCT_PACKAGES += \
-   Gallery2
-' >> device.mk
-sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*$//g' BoardConfig.mk
-echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
-cd ../../../
-
-sleep 15
-
-set +v
-
-source build/envsetup.sh          ; check_fail
-breakfast chime user              ; check_fail
-mka installclean
-mka bacon                         ; check_fail
-
-set -v
-
-echo success > result.txt
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME VANILLA on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
-curl -s -d "Build $PACKAGE_NAME VANILLA on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
-
-cp out/target/product/chime/$PACKAGE_NAME*VANILLA*.zip .
-GO_FILE=`ls -1S $PACKAGE_NAME*VANILLA*.zip | tail -1`
-GO_FILE=`pwd`/$GO_FILE
-curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
-bash goupload.sh $GO_FILE
-GO_LINK=`cat GOFILE.txt`
-curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$PACKAGE_NAME `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
-curl -s -d "$PACKAGE_NAME `basename $GO_FILE` $GO_LINK" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
-rm -f goupload.sh GOFILE.txt
-cp $GO_FILE $GO_FILE.new.zip
-rm -f $GO_FILE
-
-cd out/target/product && mv chime vanilla && cd ../../..
-
 # BEGIN GAPPS
 
 cd device/xiaomi/chime && git reset --hard ; check_fail
@@ -243,6 +194,53 @@ bash goupload.sh $GO_FILE
 GO_LINK=`cat GOFILE.txt`
 curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$PACKAGE_NAME `basename $GO_FILE` $GO_LINK . JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
 curl -s -d "$PACKAGE_NAME `basename $GO_FILE` $GO_LINK . JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+rm -f goupload.sh GOFILE.txt
+cp $GO_FILE $GO_FILE.new.zip
+rm -f $GO_FILE
+
+# Begin VANILLA
+
+cd device/xiaomi/chime && git reset --hard ; check_fail
+export RISING_MAINTAINER="Joe"
+cat lineage_chime.mk | grep -v "RESERVE_SPACE_FOR_GAPPS" > lineage_chime.mk.1
+mv lineage_chime.mk.1 lineage_chime.mk
+echo "RESERVE_SPACE_FOR_GAPPS := true" >> lineage_chime.mk
+echo 'RISING_MAINTAINER="Joe"' >> lineage_chime.mk
+echo 'RISING_MAINTAINER := Joe'  >> lineage_chime.mk
+echo 'PRODUCT_BUILD_PROP_OVERRIDES += \
+    RisingChipset="Chime" \
+    RisingMaintainer="Joe"' >> lineage_chime.mk
+echo 'WITH_GMS := false' >> lineage_chime.mk
+echo 'PRODUCT_PACKAGES += \
+   Gallery2
+' >> device.mk
+sed -ie 's/^TARGET_KERNEL_CLANG_VERSION.*$//g' BoardConfig.mk
+echo 'TARGET_KERNEL_CLANG_VERSION := stablekern' >> BoardConfig.mk
+cd ../../../
+
+sleep 15
+
+set +v
+
+source build/envsetup.sh          ; check_fail
+breakfast chime user              ; check_fail
+mka installclean
+mka bacon                         ; check_fail
+
+set -v
+
+echo success > result.txt
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="Build $PACKAGE_NAME VANILLA on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" > /dev/null 2>&1
+curl -s -d "Build $PACKAGE_NAME VANILLA on crave.io succeeded. `env TZ=Africa/Harare date`. JJ_SPEC:$JJ_SPEC" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
+
+cp out/target/product/chime/$PACKAGE_NAME*VANILLA*.zip .
+GO_FILE=`ls -1S $PACKAGE_NAME*VANILLA*.zip | tail -1`
+GO_FILE=`pwd`/$GO_FILE
+curl -o goupload.sh -L https://raw.githubusercontent.com/Joe7500/Builds/refs/heads/main/crave/gofile.sh
+bash goupload.sh $GO_FILE
+GO_LINK=`cat GOFILE.txt`
+curl -s -X POST $TG_URL -d chat_id=$TG_CID -d text="$PACKAGE_NAME `basename $GO_FILE` $GO_LINK" > /dev/null 2>&1
+curl -s -d "$PACKAGE_NAME `basename $GO_FILE` $GO_LINK" "ntfy.sh/$NTFYSUB" > /dev/null 2>&1
 rm -f goupload.sh GOFILE.txt
 cp $GO_FILE $GO_FILE.new.zip
 rm -f $GO_FILE
