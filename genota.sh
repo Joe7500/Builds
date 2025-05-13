@@ -8,7 +8,7 @@ fi
 PACKAGE="$1"
 VERSION="$2"
 INPUT_NAME="$3"
-FILE_NAME=`basename $INPUT_NAME`
+FILE_NAME=`basename $INPUT_NAME` || exit 1
 
 
 if echo $PACKAGE | grep -i crdroid; then
