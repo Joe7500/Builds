@@ -1,12 +1,12 @@
 {
     "response": [
         {
-            "datetime": "1749317495",
-            "filename": "lineage-21.0-20250319-UNOFFICIAL-chime.0701.user.zip",
-            "id": "f4c5f53c164eb9c90a6b1ca9c36c33cc2626f917442d53b35ad3fd7bb5ab657a",
+            "datetime": "1749325217",
+            "filename": "CalyxOS-chime-25608200-07-06-2025-2057.zip",
+            "id": "348994b89b52e4fb1b173c0b00cef23b8a45a479ca512d0e520ebe37e5f7ce26"
             "romtype": "unofficial",
             "size": "1071713635",
-            "url": "https://sourceforge.net/projects/joes-android-builds/files/LineageOS/20/lineage-20.0-20250510-UNOFFICIAL-chime.zip/download",
+            "url": "https://github.com/Joe7500/Builds/releases/download/calyx-ota/CalyxOS-chime-25608200-07-06-2025-2057.zip",
             "version": "6.8"
         }
     ]
