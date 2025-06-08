@@ -18,7 +18,7 @@ MD5=`md5sum $INPUT_NAME | cut -d " " -f 1`
 SHA=`sha256sum $INPUT_NAME | cut -d " " -f 1`
 SIZE=`ls -l $INPUT_NAME | awk '{print $5}'`
 FILE_DATE=`echo $FILE_NAME | cut -d "-" -f 3`
-TIMESTAMP=`date -d "$FILE_DATE 23:59:59" +%s` 
+TIMESTAMP=`date -d "$FILE_DATE 00:00:00" +%s` 
 
 echo '{ "response": [{' > $FILE_NAME.json.txt
 echo '"maintainer": "Joe",'  >> $FILE_NAME.json.txt
@@ -55,7 +55,7 @@ MINOR_VERSION=`echo $FILE_NAME | cut -d "-" -f 2 | cut -d . -f 2`
 SHA=`sha256sum $INPUT_NAME | cut -d " " -f 1`
 SIZE=`ls -l $INPUT_NAME | awk '{print $5}'`
 FILE_DATE=`echo $FILE_NAME | cut -d "-" -f 3`
-TIMESTAMP=`date -d "$FILE_DATE 23:59:59" +%s`
+TIMESTAMP=`date -d "$FILE_DATE 00:00:00" +%s`
 
 echo '{ "response": [{' > $FILE_NAME.json.txt
 echo '"'datetime'"': '"'$TIMESTAMP'"', >> $FILE_NAME.json.txt
