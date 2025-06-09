@@ -70,3 +70,24 @@ echo '}]}' >> $FILE_NAME.json.txt
 exit 0
 fi
 
+if echo $PACKAGE | grep -i axion; then
+
+MINOR_VERSION=`echo $FILE_NAME | cut -d "-" -f 2 | cut -d . -f 2`
+SHA=`sha256sum $INPUT_NAME | cut -d " " -f 1`
+SIZE=`ls -l $INPUT_NAME | awk '{print $5}'`
+FILE_DATE=`echo $FILE_NAME | cut -d "-" -f 4`
+TIMESTAMP=`date -d "$FILE_DATE 00:00:00" +%s`
+
+echo '{ "response": [{' > $FILE_NAME.json.txt
+echo '"'datetime'"': '"'$TIMESTAMP'"', >> $FILE_NAME.json.txt
+echo '"'filename'"': '"'$FILE_NAME'"', >> $FILE_NAME.json.txt
+echo '"'id'"': '"'$SHA'"', >> $FILE_NAME.json.txt
+echo '"romtype": "unofficial",' >> $FILE_NAME.json.txt
+echo '"'size'"': '"'$SIZE'"', >> $FILE_NAME.json.txt
+echo '"'url'"': '"'https://sourceforge.net/projects/joes-android-builds/files/axion/$FILE_NAME/download'"',  >> $FILE_NAME.json.txt
+echo '"'version'"': '"'$VERSION.$MINOR_VERSION'"'  >> $FILE_NAME.json.txt
+echo '}]}' >> $FILE_NAME.json.txt
+
+exit 0
+fi
+
