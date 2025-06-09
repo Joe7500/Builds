@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ! echo "$@" | grep -iE "crdroid|lineage" ; then
+if ! echo "$@" | grep -iE "crdroid|lineage|axion" ; then
    echo "usage: lineage|crdroid major_version file"
    exit 1
 fi 
