@@ -1,10 +1,9 @@
-BORKED
 { "response": [{
-"datetime": "1749420000",
-"filename": "axion-1.5-NIGHTLY-20250609-COMMUNITY-VANILLA-chime.zip",
-"id": "ee694d962b5afc5d37dde6845759347c3be67f9493ede93c5fab70f71869d680",
+"datetime": "1749772800",
+"filename": "axion-1.5-NIGHTLY-20250613-COMMUNITY-VANILLA-chime.zip",
+"id": "d830e84e8261268962deba3052830326aeae1b4fe11de722a41eef6a1b381186",
 "romtype": "COMMUNITY",
-"size": "1451623262",
-"url": "https://sourceforge.net/projects/joes-android-builds/files/axion/axion-1.5-NIGHTLY-20250609-COMMUNITY-VANILLA-chime.zip/download",
+"size": "1452213413",
+"url": "https://sourceforge.net/projects/joes-android-builds/files/axion/axion-1.5-NIGHTLY-20250613-COMMUNITY-VANILLA-chime.zip/download",
 "version": "1.5"
 }]}
