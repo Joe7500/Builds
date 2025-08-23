@@ -2,13 +2,13 @@
 "maintainer": "Joe",
 "oem": "Xiaomi",
 "device": "POCO M3 & Redmi 9T",
-"filename": "crDroidAndroid-15.0-20250724-chime-v11.7.zip",
-"download": "https://sourceforge.net/projects/joes-android-builds/files/crDroid/11/crDroidAndroid-15.0-20250724-chime-v11.7.zip/download",
-"timestamp": 1753315200,
-"md5": "4e2b094d8f66ef6d0ab542a6881129de",
-"sha256": "5dba49d82dec38ccd0137f7e1c2bc04b6fd05a08ef606c42f1c0975e3a53f092",
-"size": 1465024070,
-"version": "11.7",
+"filename": "crDroidAndroid-15.0-20250823-chime-v11.8.zip",
+"download": "https://sourceforge.net/projects/joes-android-builds/files/crDroid/11/crDroidAndroid-15.0-20250823-chime-v11.8.zip/download",
+"timestamp": 1755784431,
+"md5": "77bbc53bf590009d52f7fe11cc757d0f",
+"sha256": "1de5f9f35969bcaddc7807ff1192eb3006ef328164f9cf6026aa9ad97422e015",
+"size": 1467255120,
+"version": "11.8",
 "buildtype": "Monthly",
 "forum": "https://sourceforge.net/projects/joes-android-builds/",
 "gapps": "",
@@ -22,3 +22,4 @@
 "common-dt": "",
 "kernel": "https://github.com/Joe7500/kernel_xiaomi_chime"
 }]}
+
