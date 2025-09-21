@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if ! echo "$@" | grep -iE "crdroid|lineage|axion|infinity" ; then
-   echo "usage: lineage|crdroid major_version file"
+if ! echo "$@" | grep -iE "crdroid|lineage|axion|infinity|voltage" ; then
+   echo "usage: crdroid|lineage|axion|infinity|voltage major_version file"
    exit 1
 fi 
 
@@ -110,3 +110,27 @@ echo '}]}' >> $FILE_NAME.json.txt
 
 exit 0
 fi
+
+if echo $PACKAGE | grep -i voltage; then
+
+MINOR_VERSION=`echo $FILE_NAME | cut -d "-" -f 2 | cut -d . -f 2`
+MD5=`md5sum $INPUT_NAME | cut -d " " -f 1`
+SIZE=`ls -l $INPUT_NAME | awk '{print $5}'`
+FILE_DATE=`echo $FILE_NAME | cut -d "-" -f 4`
+TIMESTAMP=`date -d "$FILE_DATE 00:00:00" +%s`
+
+echo '{ "response": [{' > $FILE_NAME.json.txt
+echo '"'timestamp'"': '"'$TIMESTAMP'"', >> $FILE_NAME.json.txt
+echo '"'filename'"': '"'$FILE_NAME'"', >> $FILE_NAME.json.txt
+echo '"'md5'"': '"'$MD5'"', >> $FILE_NAME.json.txt
+echo '"maintainer": "Joe",' >> $FILE_NAME.json.txt
+echo '"'size'"': '"'$SIZE'"', >> $FILE_NAME.json.txt
+echo '"'download'"': '"'https://sourceforge.net/projects/joes-android-builds/files/voltage/$FILE_NAME/download'"',  >> $FILE_NAME.json.txt
+echo '"'version'"': '"'$VERSION.$MINOR_VERSION'"'  >> $FILE_NAME.json.txt
+echo '"oem": "xiaomi",' >> $FILE_NAME.json.txt
+echo '"device": "chime",' >> $FILE_NAME.json.txt
+echo '}]}' >> $FILE_NAME.json.txt
+
+exit 0
+fi
+
