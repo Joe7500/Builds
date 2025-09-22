@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ! echo "$@" | grep -iE "crdroid|lineage|axion|infinity|voltage" ; then
+if ! echo "$@" | grep -iE "crdroid|lineage|axion|infinity|voltage|rising" ; then
    echo "usage: crdroid|lineage|axion|infinity|voltage major_version file"
    exit 1
 fi 
@@ -130,6 +130,13 @@ echo '"'version'"': '"'$VERSION.$MINOR_VERSION'"'  >> $FILE_NAME.json.txt
 echo '"oem": "xiaomi",' >> $FILE_NAME.json.txt
 echo '"device": "chime",' >> $FILE_NAME.json.txt
 echo '}]}' >> $FILE_NAME.json.txt
+
+exit 0
+fi
+
+if echo $PACKAGE | grep -i rising; then
+
+echo 'empty' > $FILE_NAME.json.txt
 
 exit 0
 fi
