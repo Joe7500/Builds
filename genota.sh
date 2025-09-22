@@ -25,7 +25,7 @@ echo '"maintainer": "Joe",'  >> $FILE_NAME.json.txt
 echo '"oem": "Xiaomi",' >> $FILE_NAME.json.txt
 echo '"device": "POCO M3 & Redmi 9T",' >> $FILE_NAME.json.txt
 echo '"'filename'"': '"'$FILE_NAME'"', >> $FILE_NAME.json.txt
-echo '"'download'"': '"'https://sourceforge.net/projects/joes-android-builds/files/crDroid/$VERSION/$FILE_NAME/download'"', >> $FILE_NAME.json.txt
+echo '"'download'"': '"'https://sourceforge.net/projects/joes-android-builds/files/crDroid/$VERSION/$FILE_NAME/download?use_mirror=onboardcloud'"', >> $FILE_NAME.json.txt
 echo '"'timestamp'"': $TIMESTAMP, >> $FILE_NAME.json.txt
 echo '"'md5'"': '"'$MD5'"', >> $FILE_NAME.json.txt
 echo '"'sha256'"': '"'$SHA'"', >> $FILE_NAME.json.txt
@@ -63,7 +63,7 @@ echo '"'filename'"': '"'$FILE_NAME'"', >> $FILE_NAME.json.txt
 echo '"'id'"': '"'$SHA'"', >> $FILE_NAME.json.txt
 echo '"romtype": "unofficial",' >> $FILE_NAME.json.txt
 echo '"'size'"': '"'$SIZE'"', >> $FILE_NAME.json.txt
-echo '"'url'"': '"'https://sourceforge.net/projects/joes-android-builds/files/LineageOS/$VERSION/$FILE_NAME/download'"',  >> $FILE_NAME.json.txt
+echo '"'url'"': '"'https://sourceforge.net/projects/joes-android-builds/files/LineageOS/$VERSION/$FILE_NAME/download?use_mirror=onboardcloud'"',  >> $FILE_NAME.json.txt
 echo '"'version'"': '"'$VERSION.$MINOR_VERSION'"'  >> $FILE_NAME.json.txt
 echo '}]}' >> $FILE_NAME.json.txt
 
@@ -84,7 +84,7 @@ echo '"'filename'"': '"'$FILE_NAME'"', >> $FILE_NAME.json.txt
 echo '"'id'"': '"'$SHA'"', >> $FILE_NAME.json.txt
 echo '"romtype": "COMMUNITY",' >> $FILE_NAME.json.txt
 echo '"'size'"': '"'$SIZE'"', >> $FILE_NAME.json.txt
-echo '"'url'"': '"'https://sourceforge.net/projects/joes-android-builds/files/axion/$FILE_NAME/download'"',  >> $FILE_NAME.json.txt
+echo '"'url'"': '"'https://sourceforge.net/projects/joes-android-builds/files/axion/$FILE_NAME/download?use_mirror=onboardcloud'"',  >> $FILE_NAME.json.txt
 echo '"'version'"': '"'$VERSION.$MINOR_VERSION'"'  >> $FILE_NAME.json.txt
 echo '}]}' >> $FILE_NAME.json.txt
 
@@ -101,7 +101,7 @@ TIMESTAMP=`date -d "$FILE_DATE 00:00:00" +%s`
 
 echo '{ "response": [{' > $FILE_NAME.json.txt
 echo '"'filename'"': '"'$FILE_NAME'"', >> $FILE_NAME.json.txt
-echo '"'download'"': '"'https://sourceforge.net/projects/joes-android-builds/files/Infinity-X/$VERSION/$FILE_NAME/download'"',  >> $FILE_NAME.json.txt
+echo '"'download'"': '"'https://sourceforge.net/projects/joes-android-builds/files/Infinity-X/$VERSION/$FILE_NAME/download?use_mirror=onboardcloud'"',  >> $FILE_NAME.json.txt
 echo '"'timestamp'"': '"'$TIMESTAMP'"', >> $FILE_NAME.json.txt
 echo '"'md5'"': '"'$MD5'"', >> $FILE_NAME.json.txt
 echo '"'size'"': '"'$SIZE'"', >> $FILE_NAME.json.txt
@@ -125,7 +125,7 @@ echo '"'filename'"': '"'$FILE_NAME'"', >> $FILE_NAME.json.txt
 echo '"'md5'"': '"'$MD5'"', >> $FILE_NAME.json.txt
 echo '"maintainer": "Joe",' >> $FILE_NAME.json.txt
 echo '"'size'"': '"'$SIZE'"', >> $FILE_NAME.json.txt
-echo '"'download'"': '"'https://sourceforge.net/projects/joes-android-builds/files/voltage/$FILE_NAME/download'"',  >> $FILE_NAME.json.txt
+echo '"'download'"': '"'https://sourceforge.net/projects/joes-android-builds/files/voltage/$FILE_NAME/download?use_mirror=onboardcloud'"',  >> $FILE_NAME.json.txt
 echo '"'version'"': '"'$VERSION.$MINOR_VERSION'"'  >> $FILE_NAME.json.txt
 echo '"oem": "xiaomi",' >> $FILE_NAME.json.txt
 echo '"device": "chime",' >> $FILE_NAME.json.txt
