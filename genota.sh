@@ -136,8 +136,36 @@ fi
 
 if echo $PACKAGE | grep -i rising; then
 
-echo 'empty' > $FILE_NAME.json.txt
+MINOR_VERSION=`echo $FILE_NAME | cut -d . -f 3`
+MD5=`md5sum $INPUT_NAME | cut -d " " -f 1`
+SHA=`sha256sum $INPUT_NAME | cut -d " " -f 1`
+SIZE=`ls -l $INPUT_NAME | awk '{print $5}'`
+FILE_DATE=`echo $FILE_NAME | cut -d "-" -f 3`
+TIMESTAMP=`date -d "$FILE_DATE 00:00:00" +%s`
+RISING_VERSION=`echo $FILE_NAME | cut -d '-' -f 2`
+
+echo '{ "response": [{' > $FILE_NAME.json.txt
+echo '"maintainer": "Joe",'  >> $FILE_NAME.json.txt
+echo '"oem": "Xiaomi",' >> $FILE_NAME.json.txt
+echo '"device": "POCO M3 & Redmi 9T",' >> $FILE_NAME.json.txt
+echo '"'filename'"': '"'$FILE_NAME'"', >> $FILE_NAME.json.txt
+echo '"'download'"': '"'https://sourceforge.net/projects/joes-android-builds/files/risingOS/$VERSION/$FILE_NAME/download?use_mirror=onboardcloud'"', >> $FILE_NAME.json.txt
+echo '"'timestamp'"': $TIMESTAMP, >> $FILE_NAME.json.txt
+echo '"'md5'"': '"'$MD5'"', >> $FILE_NAME.json.txt
+echo '"'sha256'"': '"'$SHA'"', >> $FILE_NAME.json.txt
+echo '"'size'"': $SIZE, >> $FILE_NAME.json.txt
+echo '"'version'"': '"'$RISING_VERSION'"', >> $FILE_NAME.json.txt
+echo '"buildtype": "Monthly",' >> $FILE_NAME.json.txt
+echo '"forum": "https://sourceforge.net/projects/joes-android-builds/",' >> $FILE_NAME.json.txt
+echo '"recovery": "",' >> $FILE_NAME.json.txt
+echo '"paypal": "",' >> $FILE_NAME.json.txt
+echo '"telegram": "https://t.me/joes_stuff",' >> $FILE_NAME.json.txt
+echo '}]}' >> $FILE_NAME.json.txt
+
+#echo 'empty' > $FILE_NAME.json.txt
 
 exit 0
 fi
+
+exit 1
 
