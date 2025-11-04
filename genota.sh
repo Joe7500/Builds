@@ -129,9 +129,9 @@ echo '"'md5'"': '"'$MD5'"', >> $FILE_NAME.json.txt
 echo '"maintainer": "Joe",' >> $FILE_NAME.json.txt
 echo '"'size'"': '"'$SIZE'"', >> $FILE_NAME.json.txt
 echo '"'download'"': '"'https://sourceforge.net/projects/joes-android-builds/files/voltage/$FILE_NAME/download?use_mirror=onboardcloud'"',  >> $FILE_NAME.json.txt
-echo '"'version'"': '"'$VERSION.$MINOR_VERSION'"'  >> $FILE_NAME.json.txt
+echo '"'version'"': '"'$VERSION.$MINOR_VERSION'"',  >> $FILE_NAME.json.txt
 echo '"oem": "xiaomi",' >> $FILE_NAME.json.txt
-echo '"device": "chime",' >> $FILE_NAME.json.txt
+echo '"device": "chime"' >> $FILE_NAME.json.txt
 echo '}]}' >> $FILE_NAME.json.txt
 
 exit 0
