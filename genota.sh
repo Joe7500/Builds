@@ -97,7 +97,10 @@ MINOR_VERSION=`echo $FILE_NAME | cut -d "-" -f 3 | cut -d . -f 2`
 MD5=`md5sum $INPUT_NAME | cut -d " " -f 1`
 SIZE=`ls -l $INPUT_NAME | awk '{print $5}'`
 FILE_DATE=`echo $FILE_NAME | cut -d "-" -f 5`
-TIMESTAMP=`date -d "$FILE_DATE 00:00:00" +%s`
+FILE_DAY=`echo $FILE_DATE | cut -d "." -f 1`
+FILE_MONTH=`echo $FILE_DATE | cut -d "." -f 2`
+FILE_YEAR=`echo $FILE_DATE | cut -d "." -f 3`
+TIMESTAMP=`date -d "$FILE_YEAR$FILE_MONTH$FILE_DAY 00:00:00" +%s`
 
 echo '{ "response": [{' > $FILE_NAME.json.txt
 echo '"'filename'"': '"'$FILE_NAME'"', >> $FILE_NAME.json.txt
