@@ -82,7 +82,7 @@ echo '{ "response": [{' > $FILE_NAME.json.txt
 echo '"'datetime'"': '"'$TIMESTAMP'"', >> $FILE_NAME.json.txt
 echo '"'filename'"': '"'$FILE_NAME'"', >> $FILE_NAME.json.txt
 echo '"'id'"': '"'$SHA'"', >> $FILE_NAME.json.txt
-echo '"romtype": "COMMUNITY",' >> $FILE_NAME.json.txt
+echo '"romtype": "UNOFFICIAL",' >> $FILE_NAME.json.txt
 echo '"'size'"': '"'$SIZE'"', >> $FILE_NAME.json.txt
 echo '"'url'"': '"'https://sourceforge.net/projects/joes-android-builds/files/axion/$FILE_NAME/download?use_mirror=onboardcloud'"',  >> $FILE_NAME.json.txt
 echo '"'version'"': '"'$VERSION.$MINOR_VERSION'"'  >> $FILE_NAME.json.txt
