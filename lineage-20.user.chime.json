@@ -1,9 +1,9 @@
 { "response": [{
-"datetime": "1766188800",
-"filename": "lineage-20.0-20251220-UNOFFICIAL-chime.zip",
-"id": "d958798b2e8d65c082aea10098a4a3100e3086e2231721d0f1d37fac37b2ce02",
+"datetime": "1767744000",
+"filename": "lineage-20.0-20260107-UNOFFICIAL-chime.zip",
+"id": "2340a83b62785e4e483ac8e811f56b037404d707952e95ef5b2b3eecd86503b5",
 "romtype": "unofficial",
-"size": "1083116439",
-"url": "https://sourceforge.net/projects/joes-android-builds/files/LineageOS/20/lineage-20.0-20251220-UNOFFICIAL-chime.zip/download?use_mirror=onboardcloud",
+"size": "1083113949",
+"url": "https://sourceforge.net/projects/joes-android-builds/files/LineageOS/20/lineage-20.0-20260107-UNOFFICIAL-chime.zip/download?use_mirror=onboardcloud",
 "version": "20.0"
 }]}
