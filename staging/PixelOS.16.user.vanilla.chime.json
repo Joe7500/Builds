@@ -1,0 +1,15 @@
+{
+"maintainer": [{"display_name": "Joe","telegram": "joes_stuff","github": "Joe7500"}],
+"vendor": "Xiaomi",
+"model": "POCO M3 & Redmi 9T",
+"codename": "chime",
+"codename_alt": "juice",
+"active": "true",
+"version": "sixteen",
+"release": "monthly",
+"last_updated": "06 February 2026",
+"download": "https://sourceforge.net/projects/joes-android-builds/files/pixelos/PixelOS_chime-16.1-20260205-2358.zip/download?use_mirror=onboardcloud",
+"archive": "https://sourceforge.net/projects/joes-android-builds/files/",
+"xda": "null"
+}
+
