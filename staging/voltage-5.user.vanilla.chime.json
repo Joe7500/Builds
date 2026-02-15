@@ -1,11 +1,11 @@
 { "response": [{
-"timestamp": "1769990400",
-"filename": "voltage-5.5-chime-20260202-0654-COMMUNITY.zip",
-"md5": "ad9fc69f58fa1f23791ad0449793ca72",
+"timestamp": "1770940800",
+"filename": "voltage-5.6-chime-20260213-2212-COMMUNITY.zip",
+"md5": "071a12db2b44353024ca1f5825faa43e",
 "maintainer": "Joe",
-"size": "1627133830",
-"download": "https://sourceforge.net/projects/joes-android-builds/files/voltage/voltage-5.5-chime-20260202-0654-COMMUNITY.zip/download?use_mirror=onboardcloud",
-"version": "5.5",
+"size": "1620427429",
+"download": "https://sourceforge.net/projects/joes-android-builds/files/voltage/voltage-5.6-chime-20260213-2212-COMMUNITY.zip/download?use_mirror=onboardcloud",
+"version": "5.6",
 "oem": "xiaomi",
 "device": "chime"
 }]}
