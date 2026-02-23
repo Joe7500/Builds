@@ -170,30 +170,35 @@ echo '}]}' >> $FILE_NAME.json.txt
 exit 0
 fi
 
+#{
+#    "response": [
+#        {
+#            "datetime": "1768744709",
+#            "filename": "PixelOS_alioth-16.1-20260118-1400.zip",
+#            "id": "f5b933af7a00769078a7fffe78f50a2b487e6cff7990006ab746f45a6695c6a8",
+#            "size": 2349362128,
+#            "url": "https://sourceforge.net/projects/pixelos-releases/files/sixteen/alioth/PixelOS_alioth-16.1-20260118-1400.zip",
+#            "version": 16
+#        }
+#    ]
+#}
+
 if echo $PACKAGE | grep -i pixelos; then
 
-MINOR_VERSION=`echo $FILE_NAME | cut -d . -f 3`
-MD5=`md5sum $INPUT_NAME | cut -d " " -f 1`
+MINOR_VERSION=`echo $FILE_NAME | cut -d "-" -f 2 | cut -d . -f 2`
 SHA=`sha256sum $INPUT_NAME | cut -d " " -f 1`
 SIZE=`ls -l $INPUT_NAME | awk '{print $5}'`
 FILE_DATE=`echo $FILE_NAME | cut -d "-" -f 3`
 TIMESTAMP=`date -d "$FILE_DATE 00:00:00" +%s`
-TODAY=`date +"%d %B %Y"`
 
-echo '{' > $FILE_NAME.json.txt
-echo '"maintainer": [{"display_name": "Joe","telegram": "joes_stuff","github": "Joe7500"}],'  >> $FILE_NAME.json.txt
-echo '"vendor": "Xiaomi",' >> $FILE_NAME.json.txt
-echo '"model": "POCO M3 & Redmi 9T",' >> $FILE_NAME.json.txt
-echo '"codename": "chime",' >> $FILE_NAME.json.txt
-echo '"codename_alt": "juice",' >> $FILE_NAME.json.txt
-echo '"active": "true",' >> $FILE_NAME.json.txt
-echo '"'version'"': '"'sixteen'"', >> $FILE_NAME.json.txt
-echo '"'release'"': '"'monthly'"', >> $FILE_NAME.json.txt
-echo '"'last_updated'"': '"'$TODAY'"', >> $FILE_NAME.json.txt
-echo '"'download'"': '"'https://sourceforge.net/projects/joes-android-builds/files/pixelos/$FILE_NAME/download?use_mirror=onboardcloud'"', >> $FILE_NAME.json.txt
-echo '"'archive'"': '"'https://sourceforge.net/projects/joes-android-builds/files/'"', >> $FILE_NAME.json.txt
-echo '"'xda'"': '"'null'"' >> $FILE_NAME.json.txt
-echo '}' >> $FILE_NAME.json.txt
+echo '{ "response": [{' > $FILE_NAME.json.txt
+echo '"'datetime'"': '"'$TIMESTAMP'"', >> $FILE_NAME.json.txt
+echo '"'filename'"': '"'$FILE_NAME'"', >> $FILE_NAME.json.txt
+echo '"'id'"': '"'$SHA'"', >> $FILE_NAME.json.txt
+echo '"'size'"': $SIZE, >> $FILE_NAME.json.txt
+echo '"'url'"': '"'https://sourceforge.net/projects/joes-android-builds/files/pixelos/$FILE_NAME/download?use_mirror=onboardcloud'"',  >> $FILE_NAME.json.txt
+echo '"'version'"': $VERSION  >> $FILE_NAME.json.txt
+echo '}]}' >> $FILE_NAME.json.txt
 
 exit 0
 fi
