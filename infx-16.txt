@@ -1,87 +1,52 @@
-[2025/11/09 14:42]
-Changelog for @ProjectInfinityX v3.4 Release:
-(Kindly also go-through changelogs from sub-releases of v3.3 that were released in later October month: https://t.me/ProjectInfinityX/1583 & https://t.me/ProjectInfinityX/1568)
+Changelog for @ProjectInfinityX v3.10 Release:
 
-Screenshots (https://t.me/ProjectInfinityX/1506?single) (v3.x)
-Screenshots (https://t.me/ProjectInfinityX/1589) (For some of these new additions)
+- Complete Android 16 ROM Screenshots  (https://t.me/ProjectInfinityX/1697?single)
+- Highlighted Screenshots for this new release and changelog (https://t.me/ProjectInfinityX/1849)
 
-NOTE: From now onwards, we've started assigning author names to each change (where its applicable) to give proper credit for the work used in our project. Thanks to all the wonderful authors! If you believe you’re the original author for any change mentioned here or notice any incorrect credit label, feel free to DM @tejas101k and get it corrected after verification.
+NOTE: As always the author’s name is listed at the end of line for each change (wherever applicable) to give proper credit for their respective work used in our project. A big thanks to all the wonderful authors!
+If you believe you are the original author of any change mentioned here, or if you notice any incorrect credit mention, please feel free to DM @tejas101k for re-verification and correction.
 
-- Bump security string to November 1, 2025
-- Fix SystemUI's location use every 5 minutes or when pulling qs panel
-- Add optional toggleable proper circle qs tile shape (author: neobuddy89)
-- Add toggleable ambient wallpaper feature (author: Ghosuto)
-- Add custom json based game spoofing (author: minaripenguin)
-- Add various patches to fix some detections in banking apps (author: neobuddy89)
-- Add feature to control system-wide blur intensity (author: NurKeinNeid)
-- Add feature to show ambient display on lift to wake device (author: idoybh)
-- Add feature to show ambient display on single tap when device is locked (only for devices which supports native single tap sensor)  (author: aswin7469)
-- Fix double tap to show ambient display for devices using native double tap sensor implementation 
-- Show weather info on lockscreen even on ambient display
-- Add shake gestures feature (author: minaripenguin)
-- Fix some janks and delays while pulling qs quickly
-- Fix lags/hiccups on some popup animations / new events on higher refresh rate devices
-- Improvements for more smoother scrolling
-- Improve some battery draining overhead
-- Improve memory consumption / battery overhead by system_server, surfacelinger and libbinder
-- Bring back OxygenOS Icon pack
-- Make translucent notifications view a bit more translucent
-- Add proper toggle for pulse visualizer on ambient display (author: Ghosuto)
-- Introduce more new pulse visualizer styles (author: Ghosuto)
-- Revamp edge light feature completely (author: neobuddy89 & Ghosuto)
-- Add more new edge light styles & effects (author: Ghosuto, neobuddy89 for improvements)
-- Allow to optionally show edge light on complete frame (author: minaripenguin)
-- Shorten carrier name display on quicksettings (eg. "JIO 4G - JIO" to just "JIO") improves quicksettings layout with 2 sim cards solving occasional overlapping and clutterness  (author: ghostrider-reborn)
-- Make quicksettings clock header properly switch instantly to white/black color on dark/light theme respectively
-- Make network traffic indicator / carrier icon on quicksettings properly switch instantly to white/black color on dark/light theme respectively
-- Allow disabling refresh rate lowering in battery saver (author: ghostrider-reborn)
-- Add per-app refresh rate control feature (author: cjh1249131356)
-- Fix ongoing notification progress chip being occasionally stuck even after process end (author: shutter-cat)
-- Add more new animations and theming to ongoing progress notification (author: shutter-cat)
-- Hide ongoing progress notification chip when heads up notification arrives to fix some overlapping instances (author: shutter-cat)
-- Make Ongoing chip size and position configurable (author: Ghosuto)
-- Add more new APNs (author: Multiple at lineage review)
-- Simplify build date display in ZIP name
-- Revamp post-build compilation message
-- Add bash, curl, getcap, htop, nano, setcap, vim, rsync binaries back to system shell
-- Make recovery to now allow downgrade rom zip with older security patch level (author: rmp22)
-- Hide doze on charge toggle if alwaysondisplay not supported
-
-Tip: Import a valid unrevoked keybox xml in Infinity Suite > Misc > Spoofing > "Select keybox xml" if you want functional gpay contactless payment/tap to pay
+- Add QS Panel styles (HyperOS/OxygenOS/InfinityX Style) (https://t.me/ProjectInfinityX/1850)
+- Add statusbar icon packs, signal-wifi icon styles, battery icon styles and charging animations (author: rmp22) (https://t.me/ProjectInfinityX/1860)
+- Fixed MyAirtel app and DigiLocker app crash and fixed other tons of banking apps
+- Switch GameSpace implementation to AxionOS 's gamespace (author: neobuddy89) (https://t.me/ProjectInfinityX/1862)
+- Allow changing system emoji styles to iOS or Samsung (author: TwistedVision518) (https://t.me/ProjectInfinityX/1865)
+- Make lockscreen notifications appear over depth wallpaper (author: yusufnoor786)
+- Add OmniJaws frontend inbuilt weather app (author: rmp22) (https://t.me/ProjectInfinityX/1868)
+- Fixed Firefox/browsers SystemUI crash on media playing when dynamic bar enabled
+- Fixed headsup dialer notification on incoming calls when dynamic bar enabled (author: neobuddy89)
+- Fixed dynamic bar download/other progress bars not updating on click to show expanded event & re-design dynamic bar lockscreen media popup view (author: rmp22)
+- Improve dynamic bar battery view on lockscreen along with actual charging info stats also allow to disable (author: neobuddy89)
+- Fixed dynamic bar messed up statusbar padding for some devices (eg. overlapping with statusbar or touching statusbar clock etc.)
+- Align dynamicbar lockscreen chip with keyguard indication margin (author: bijoyv9)
+- Suppress Dynamic Bar notifications when Danmaku notification is active (author: Saikrishna1504)
+- Added more screenrecorder options (author: rmp22) (https://t.me/ProjectInfinityX/1867)
+- Add QS Tiles animation styles (author: neobuddy89)
+- Enable statusbar burn-in protection for all devices by default
+- Restore stock android lockscreen bottom shortcut buttons along with size and paddings
+- Allow single tap behaviour instead of hold for lockscreen bottom shortcut buttons (author: prochy-exe)
+- Allow applying Monet colors to the lockscreen PIN and pattern screen (bouncer) view
+- Add feature to allow launching app in freeform window by swiping and holding it up in recents panel (author: ZL114514, zylhdrXP, DrDisagree)
+- Fixed smart pixels complete device freezing on use and improve logic
+- Make expanded volume panel ringer button shape completely circular
+- Add 2 new pulse styles along with toggle to configure bass haptics playback (author: neobuddy89)
+- Fixed QS tile inconsistent gradient colors with single tone tile style
+- Fixed camouflaging notifications footer buttons when alternate notification color enabled
+- Allow to show pure black/white qs notifications when alternate notification color disabled
+- Make statusbar display on lockscreen when media album art in use
+- Force disable all annoying inconsistent qs tile squish effects
+- New customizations for sidebar (author: kenway214)
+- Allow hiding lockscreen clock
+- Make volume slider haptics toggle work on expanded volume style too
+- Make idle manager more consistent and aggressive
+- Add toggle to prevent apps from launching the \"Get this app from Play\" screen when not installed from Play Store (author: joshuah345)
+- Live circle battery style colors based on events like low battery or charging (author: mikooomich)
+- Improve animations performance and system fluidity
+- Improve QS Panel janks/lag scenarios with plenty of notifications 
+- Disable unnecessary logging and overhead conditions impacting performance and leading to battery drains
 
 Infinite Love! ❤️
 Device Updates: @InfinityXUpdate
 Discussion: @InfinityXGroup
 Announcements: @ProjectInfinityX
 Website: projectinfinity-x.com
-
-[2025/11/09 14:42]
-The default enforced strong integrity method got patched today. Devices running Infinity-X v3.1+ will fail all 3 integrity checks.
-
-To fix this for now:
-1. Download the attached keybox. xml file.
-2. Open Infinity Suite > Miscellaneous > Spoofing → Select keybox XML to spoof.
-3. Import this keybox.xml file there.
-
-After importing, strong integrity checks will pass again.
-
-A detailed patch to counter this (and any future interventions) will be pushed to the source sometime soon.
-
-[2025/11/09 14:42]
-Changelog for @ProjectInfinityX Version 3.4 releasing since 08/11/2025
-
-Complete v3.4 changelog (https://t.me/ProjectInfinityX/1606)
-Screenshots (https://t.me/ProjectInfinityX/1506?single)
-
-- Pass strong integrity by default once again
-- Fixed issue with playstore showing some apps (Eg. JioFinance etc.) as not compatible on the device
-- The fix for Google pay contactless payment (tap to pay) is also added by default but this may not last forever and always needs a valid unrevoked keybox >
-- Add toggles to spoof Snapchat, Netflix, Google app to pixel model in spoofing settings
-- Add toggle to disable playstore spoof.
-- Disabling in-rom playintegrity fix is also made more effective now.. If you wish to apply playintegrityfix from external modules, you can disable in-rom >
-- Fixed hide screen capture status feature
-- Allow monet settings chroma factor / luminance sliders to achieve negative values
-- Add toggle for ambient media art (author: neobuddy89)
-- Enable "install available apps" in Settings (author: empratyush)
-- Add translations to LMOFreeForm
-
