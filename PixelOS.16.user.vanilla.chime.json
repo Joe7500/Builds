@@ -4,8 +4,13 @@
       "display_name": "Joe",
       "telegram": "joes_stuff",
       "github": "Joe7500"
-    }
-  ],
+    },
+        {
+            "display_name": "Zohaib",
+            "telegram": "lemezohaib",
+            "github": "lemezohaib"
+        }
+    ],
   "model": "POCO M3 / Redmi 9T",
   "vendor": "Xiaomi",
   "codename": "chime",
