@@ -31,6 +31,10 @@ echo '"'md5'"': '"'$MD5'"', >> $FILE_NAME.json.txt
 echo '"'sha256'"': '"'$SHA'"', >> $FILE_NAME.json.txt
 echo '"'size'"': $SIZE, >> $FILE_NAME.json.txt
 echo '"'version'"': '"'$VERSION.$MINOR_VERSION'"', >> $FILE_NAME.json.txt
+if [ $VERSION -eq 12 ] ; then
+  echo '"'os_patch_level'"': '"'$(date +%Y-%m-%d)'"', >> $FILE_NAME.json.txt
+  echo '"'os_sdk_level'"': 36, >> $FILE_NAME.json.txt
+fi
 echo '"buildtype": "Monthly",' >> $FILE_NAME.json.txt
 echo '"forum": "https://sourceforge.net/projects/joes-android-builds/",' >> $FILE_NAME.json.txt
 echo '"gapps": "",' >> $FILE_NAME.json.txt
