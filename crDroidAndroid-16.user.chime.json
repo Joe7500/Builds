@@ -9,6 +9,8 @@
 "sha256": "f48d1e75750be97c2aa92dee1744a2feb90f4e29e6fda40d779dca5bfd561406",
 "size": 1603216095,
 "version": "12.13",
+"os_patch_level": "2026-09-01",
+"os_sdk_level": 36,
 "buildtype": "Monthly",
 "forum": "https://sourceforge.net/projects/joes-android-builds/",
 "gapps": "",
