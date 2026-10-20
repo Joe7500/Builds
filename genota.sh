@@ -162,7 +162,7 @@ echo '"'md5'"': '"'$MD5'"', >> $FILE_NAME.json.txt
 echo '"'sha256'"': '"'$SHA'"', >> $FILE_NAME.json.txt
 echo '"'size'"': $SIZE, >> $FILE_NAME.json.txt
 echo '"'version'"': '"'$RISING_VERSION'"', >> $FILE_NAME.json.txt
-echo '"buildtype": "Monthly",' >> $FILE_NAME.json.txt
+echo '"buildtype": "STABLE",' >> $FILE_NAME.json.txt
 echo '"forum": "https://sourceforge.net/projects/joes-android-builds/",' >> $FILE_NAME.json.txt
 echo '"recovery": "",' >> $FILE_NAME.json.txt
 echo '"paypal": "",' >> $FILE_NAME.json.txt
