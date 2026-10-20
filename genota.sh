@@ -166,7 +166,7 @@ echo '"buildtype": "STABLE",' >> $FILE_NAME.json.txt
 echo '"forum": "https://sourceforge.net/projects/joes-android-builds/",' >> $FILE_NAME.json.txt
 echo '"recovery": "",' >> $FILE_NAME.json.txt
 echo '"paypal": "",' >> $FILE_NAME.json.txt
-echo '"telegram": "https://t.me/joes_stuff",' >> $FILE_NAME.json.txt
+echo '"telegram": "https://t.me/joes_stuff"' >> $FILE_NAME.json.txt
 echo '}]}' >> $FILE_NAME.json.txt
 
 #echo 'empty' > $FILE_NAME.json.txt
