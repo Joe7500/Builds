@@ -1,0 +1,18 @@
+{ "response": [{
+"maintainer": "Joe",
+"oem": "Xiaomi",
+"device": "POCO M3 & Redmi 9T",
+"filename": "RisingOS-9-261019-0743-GAPPS-COMMUNITY-chime-ota.zip",
+"download": "https://sourceforge.net/projects/joes-android-builds/files/risingOS/9/RisingOS-9-261019-0743-GAPPS-COMMUNITY-chime-ota.zip/download?use_mirror=onboardcloud",
+"timestamp": 1792370800,
+"md5": "a9747358a2e520cba80d7b4be41b2b9a",
+"sha256": "90ae74a50bc5f16c8679c52cc417b232ec119ccfb94b299803afd8b137e276cf",
+"size": 3425742645,
+"version": "9",
+"buildtype": "Monthly",
+"forum": "https://sourceforge.net/projects/joes-android-builds/",
+"recovery": "",
+"paypal": "",
+"telegram": "https://t.me/joes_stuff",
+}]}
+
