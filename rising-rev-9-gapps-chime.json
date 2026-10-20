@@ -1,21 +1,18 @@
-{
-	"response": [
-		{
-			"maintainer": "Jrcable2",
-			"oem": "Google",
-			"device": "husky",
-			"filename": "RisingOS-9-261012-1116-GAPPS-OFFICIAL-husky-ota.zip",
-			"download": "https://sourceforge.net/projects/risingos-revived/files/9.x/GAPPS/husky/RisingOS-9-261012-1116-GAPPS-OFFICIAL-husky-ota.zip/download",
-			"timestamp": 1791817990,
-			"md5": "dc5680e52ecb274f95e103e4f40f5ed2",
-			"sha256": "61a96ea82d5c0ca6f20a11ceb5a7eef5886852664ab880ba68048ee96c296263",
-			"size": 3420919044,
-			"version": "9-elefthería",
-			"buildtype": "STABLE",
-			"forum": "https://xdaforums.com/t/rom-official-risingos-revived-7-0-a15-april-spl-shusky.4670958/",
-			"recovery": "",
-			"paypal": "https://paypal.me/Jrcable0",
-			"telegram": "https://t.me/+E67IdG0vR0gzZWEx"
-		}
-	]
-}
+{ "response": [{
+"maintainer": "Joe",
+"oem": "Xiaomi",
+"device": "POCO M3 & Redmi 9T",
+"filename": "RisingOS-9-261019-0743-GAPPS-COMMUNITY-chime-ota.zip",
+"download": "https://sourceforge.net/projects/joes-android-builds/files/risingOS/9/RisingOS-9-261019-0743-GAPPS-COMMUNITY-chime-ota.zip/download?use_mirror=onboardcloud",
+"timestamp": 1792360800,
+"md5": "a9747358a2e520cba80d7b4be41b2b9a",
+"sha256": "90ae74a50bc5f16c8679c52cc417b232ec119ccfb94b299803afd8b137e276cf",
+"size": 3425762645,
+"version": "9",
+"buildtype": "Monthly",
+"forum": "https://sourceforge.net/projects/joes-android-builds/",
+"recovery": "",
+"paypal": "",
+"telegram": "https://t.me/joes_stuff"
+}]}
+
