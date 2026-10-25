@@ -1,25 +1,20 @@
 {
-  "maintainer": [
-    {
-      "display_name": "Joe",
-      "telegram": "joes_stuff",
-      "github": "Joe7500"
-    },
+    "maintainer": [
         {
-            "display_name": "Zohaib",
-            "telegram": "lemezohaib",
-            "github": "lemezohaib"
+            "display_name": "Abdulaziz",
+            "telegram": "xAbdaziz",
+            "github": "xAbdaziz"
         }
     ],
-  "model": "POCO M3 / Redmi 9T",
-  "vendor": "Xiaomi",
-  "codename": "chime",
-  "codename_alt": "chime",
-  "active": true,
-  "version": "seventeen",
-  "release": "monthly",
-  "last_updated": "19 September 2026",
-  "download_link": "https://sourceforge.net/projects/joes-android-builds/files/pixelos/PixelOS_chime-17.0-20260917-1808.zip/download?use_mirror=onboardcloud",
-  "archive": "https://sourceforge.net/projects/joes-android-builds/files/pixelos/",
-  "xda": "https://sourceforge.net/projects/joes-android-builds/files/pixelos/"
+    "model": "Nothing Phone (1)",
+    "vendor": "Nothing",
+    "codename": "Spacewar",
+    "codename_alt": "A063",
+    "active": true,
+    "version": "seventeen",
+    "release": "monthly",
+    "last_updated": "23 October 2026",
+    "download_link": "https://download.pixelos.net/seventeen/Spacewar/PixelOS_Spacewar-17.0-20261023-1408.zip",
+    "archive": "https://sourceforge.net/projects/pixelos-releases/files/seventeen/Spacewar/",
+    "xda": null
 }
